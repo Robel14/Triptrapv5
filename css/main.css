@@ -1,0 +1,217 @@
+/* ========================================================
+   TRIPTAP — ETHIOPIA TRAVEL MARKETPLACE
+   Design System: White & Blue Aesthetic
+   ======================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Noto+Sans+Ethiopic:wght@400;500;600;700&family=Cairo:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* White & Blue Color Palette */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-ice: #f0f7ff;
+  --bg-ice-subtle: #f5f9ff;
+  --bg-card: #ffffff;
+  --bg-surface: #ffffff;
+
+  /* Royal & Deep Blue Accents */
+  --blue-primary: #1d4ed8;       /* Royal Blue */
+  --blue-hover: #1e40af;
+  --blue-active: #172554;
+  --blue-accent: #2563eb;       /* Electric/Vibrant Blue */
+  --blue-light: #eff6ff;
+  --blue-border: #bfdbfe;
+  --blue-glow: rgba(37, 99, 235, 0.22);
+  --blue-sky: #38bdf8;
+
+  /* Telebirr Brand Colors */
+  --telebirr-cyan: #0284c7;
+  --telebirr-bg: #e0f2fe;
+  --telebirr-border: #7dd3fc;
+
+  /* Neutrals & Text */
+  --text-main: #0f172a;        /* Deep Navy Black */
+  --text-muted: #475569;       /* Slate Grey */
+  --text-subtle: #64748b;
+  --border-light: #e2e8f0;
+  --border-card: #e2e8f0;
+  
+  /* Status Colors */
+  --success: #10b981;
+  --success-bg: #ecfdf5;
+  --warning: #f59e0b;
+  --warning-bg: #fffbeb;
+  --danger: #ef4444;
+  --danger-bg: #fef2f2;
+
+  /* Elevations & Shadows */
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 4px 14px -1px rgba(15, 76, 129, 0.08), 0 2px 6px -1px rgba(15, 76, 129, 0.04);
+  --shadow-lg: 0 12px 30px -4px rgba(29, 78, 216, 0.12), 0 4px 12px -2px rgba(15, 23, 42, 0.05);
+  --shadow-glow: 0 0 25px rgba(37, 99, 235, 0.25);
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  --font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-ethiopic: 'Noto Sans Ethiopic', 'Outfit', sans-serif;
+  --font-arabic: 'Cairo', 'Outfit', sans-serif;
+
+  --transition-fast: 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark Mode Override (Midnight Blue Canvas) */
+[data-theme="dark"] {
+  --bg-primary: #070d1e;
+  --bg-secondary: #0c162f;
+  --bg-ice: #112247;
+  --bg-ice-subtle: #0f1c3d;
+  --bg-card: #0e1b38;
+  --bg-surface: #132247;
+
+  --blue-primary: #3b82f6;
+  --blue-hover: #60a5fa;
+  --blue-active: #93c5fd;
+  --blue-accent: #38bdf8;
+  --blue-light: #172a54;
+  --blue-border: #1e3a70;
+  --blue-glow: rgba(59, 130, 246, 0.35);
+
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-subtle: #cbd5e1;
+  --border-light: #1e293b;
+  --border-card: #1e3a70;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.65);
+}
+
+/* Reset & Base Setup */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+/* Amharic & Arabic Font Adaptations */
+[lang="am"] body, [lang="am"] * {
+  font-family: var(--font-ethiopic), var(--font-family);
+}
+
+[lang="ar"] body, [lang="ar"] * {
+  font-family: var(--font-arabic), var(--font-family);
+}
+
+[dir="rtl"] {
+  text-align: right;
+}
+
+a {
+  color: var(--blue-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+button {
+  cursor: pointer;
+  user-select: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+}
+
+/* Utility Badges */
+.badge-telebirr {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background-color: var(--telebirr-bg);
+  color: var(--telebirr-cyan);
+  border: 1px solid var(--telebirr-border);
+  font-weight: 600;
+  font-size: 0.75rem;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+}
+
+.badge-trust {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background-color: #ecfdf5;
+  color: #059669;
+  border: 1px solid #a7f3d0;
+  font-weight: 600;
+  font-size: 0.75rem;
+  padding: 3px 9px;
+  border-radius: var(--radius-full);
+}
+
+[data-theme="dark"] .badge-trust {
+  background-color: rgba(5, 150, 105, 0.15);
+  border-color: rgba(5, 150, 105, 0.3);
+  color: #34d399;
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--blue-border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--blue-primary);
+}

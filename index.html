@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>TripTap — Ethiopia's Trusted Travel Marketplace | Stays, Wheels & Experiences</title>
+  <meta name="description" content="Discover verified guest houses, luxury villas, 4x4 car rentals, and authentic cultural tours across Addis Ababa, Bahir Dar, Hawassa, Lalibela, Gondar and beyond. Book safely via Telebirr." />
+  
+  <!-- Leaflet CSS for Interactive Map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+  <!-- TripTap Design System (White & Blue Aesthetic) -->
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/map.css" />
+  <link rel="stylesheet" href="css/chat.css" />
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body>
+
+  <!-- Site Navigation Header -->
+  <header class="site-header">
+    <div class="container header-container">
+      
+      <!-- Brand Logo -->
+      <div class="brand-wrapper">
+        <a href="#" class="brand-logo" onclick="window.location.reload()">
+          <span class="logo-icon">⚡</span>
+          <span>TripTap</span>
+        </a>
+        <span class="brand-tagline" data-i18n="tagline">Ethiopia's Trusted Travel Marketplace</span>
+      </div>
+
+      <!-- Category Tabs Nav (Stays, Wheels, Experiences) -->
+      <nav class="category-tabs-nav" aria-label="Booking Categories">
+        <button class="category-tab-btn active" data-category="stays" id="nav-tab-stays">
+          <span>🏡</span>
+          <span data-i18n="nav.stays">Stays</span>
+        </button>
+        <button class="category-tab-btn" data-category="wheels" id="nav-tab-wheels">
+          <span>🚗</span>
+          <span data-i18n="nav.wheels">Wheels</span>
+        </button>
+        <button class="category-tab-btn" data-category="experiences" id="nav-tab-experiences">
+          <span>☕</span>
+          <span data-i18n="nav.experiences">Experiences</span>
+        </button>
+      </nav>
+
+      <!-- Nav Actions (Languages EN/AM/AR, Theme, Host, Admin, Chat, Wishlist) -->
+      <div class="nav-actions">
+        
+        <!-- Multilingual Switcher (English, Amharic, Arabic) -->
+        <div class="lang-selector" aria-label="Language Selector">
+          <button class="lang-btn active" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="am">አማ</button>
+          <button class="lang-btn" data-lang="ar">عربي</button>
+        </div>
+
+        <!-- Light/Dark Mode Switcher -->
+        <button class="icon-btn" id="theme-toggle-btn" title="Toggle Light/Dark Theme" aria-label="Toggle Theme">
+          <span id="theme-icon">🌙</span>
+        </button>
+
+        <!-- Wishlist -->
+        <button class="icon-btn" id="nav-wishlist-btn" title="Saved Wishlist" onclick="window.app.showToast('Wishlist active: Click any card heart to toggle')">
+          <span>❤️</span>
+          <span class="icon-badge" id="wishlist-badge" style="display:none">0</span>
+        </button>
+
+        <!-- Messages / In-App Chat -->
+        <button class="icon-btn" id="nav-chat-btn" title="Messages" aria-label="In-App Messages">
+          <span>💬</span>
+        </button>
+
+        <!-- Host Mode Toggle & Dashboard -->
+        <button class="btn-secondary-pill" id="open-host-dashboard-btn">
+          <span data-i18n="nav.hostDashboard">Host Mode</span>
+        </button>
+
+        <!-- Become a Host Button (Wizard) -->
+        <button class="btn-secondary-pill" id="open-host-wizard-btn">
+          <span data-i18n="nav.becomeHost">Become a Host</span>
+        </button>
+
+        <!-- Admin Headquarters Button -->
+        <button class="btn-primary-pill" id="open-admin-portal-btn">
+          <span>🛡️</span>
+          <span data-i18n="nav.adminPortal">Admin Portal</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Hero Section with Dynamic Blurred Gradient -->
+  <section class="hero-section" data-category="stays">
+    <div class="hero-gradient-orb orb-1"></div>
+    <div class="hero-gradient-orb orb-2"></div>
+
+    <div class="container hero-content">
+      <span class="hero-badge-pill">
+        <span>🇪🇹</span>
+        <span>Telebirr Integrated · 100% Verified Hosts</span>
+      </span>
+
+      <h1 class="hero-title" id="hero-title" data-i18n="hero.staysTitle">Find Your Next Stay in Ethiopia</h1>
+      <p class="hero-subtitle" id="hero-subtitle" data-i18n="hero.staysSub">Villas, boutique hotels, apartments and traditional tukuls across the country.</p>
+
+      <!-- Interactive Search Engine Bar -->
+      <div class="search-bar-wrapper">
+        
+        <!-- Where Segment -->
+        <div class="search-field-segment" id="segment-where">
+          <div class="segment-label" data-i18n="search.where">Where</div>
+          <div class="segment-value" id="search-where-value">All Ethiopia</div>
+          
+          <!-- Where Popover -->
+          <div class="popover-card where-popover" id="where-popover">
+            <input type="text" class="city-search-input" id="city-search-input" placeholder="Search Ethiopian city..." />
+            <div class="city-options-list" id="city-options-list"></div>
+          </div>
+        </div>
+
+        <!-- Dates Segment -->
+        <div class="search-field-segment" id="segment-dates">
+          <div class="segment-label" data-i18n="search.dates">Dates</div>
+          <div class="segment-value" id="search-dates-value" data-i18n="search.selectDates">Add dates</div>
+
+          <!-- Calendar Popover -->
+          <div class="popover-card calendar-popover" id="calendar-popover">
+            <div class="calendar-header">
+              <button class="icon-btn" id="cal-prev-btn" style="width:30px;height:30px">‹</button>
+              <span class="cal-month-title" id="cal-month-title">September 2026</span>
+              <button class="icon-btn" id="cal-next-btn" style="width:30px;height:30px">›</button>
+            </div>
+            <div class="calendar-days-grid" style="margin-bottom:8px">
+              <span class="cal-day-label">Su</span>
+              <span class="cal-day-label">Mo</span>
+              <span class="cal-day-label">Tu</span>
+              <span class="cal-day-label">We</span>
+              <span class="cal-day-label">Th</span>
+              <span class="cal-day-label">Fr</span>
+              <span class="cal-day-label">Sa</span>
+            </div>
+            <div class="calendar-days-grid" id="calendar-days-grid"></div>
+            <div style="display:flex;justify-content:flex-end;margin-top:12px">
+              <button class="btn-secondary-pill" id="cal-clear-btn" style="padding:4px 10px;font-size:0.75rem" data-i18n="search.clearDates">Clear dates</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Guests Segment -->
+        <div class="search-field-segment" id="segment-guests">
+          <div class="segment-label" data-i18n="search.guests">Who</div>
+          <div class="segment-value" id="search-guests-value" data-i18n="search.guestsPlaceholder">1 guest, 1 room</div>
+
+          <!-- Guests Popover -->
+          <div class="popover-card guests-popover" id="guests-popover">
+            <div class="counter-row">
+              <div>
+                <div style="font-weight:700;font-size:0.9rem" data-i18n="search.adults">Adults</div>
+                <div style="font-size:0.75rem;color:var(--text-subtle)" data-i18n="search.adultsAge">Ages 13+</div>
+              </div>
+              <div class="counter-controls">
+                <button class="counter-btn" id="btn-minus-adults">-</button>
+                <span id="count-adults" style="font-weight:700;min-width:18px;text-align:center">1</span>
+                <button class="counter-btn" id="btn-plus-adults">+</button>
+              </div>
+            </div>
+
+            <div class="counter-row">
+              <div>
+                <div style="font-weight:700;font-size:0.9rem" data-i18n="search.children">Children</div>
+                <div style="font-size:0.75rem;color:var(--text-subtle)" data-i18n="search.childrenAge">Ages 2–12</div>
+              </div>
+              <div class="counter-controls">
+                <button class="counter-btn" id="btn-minus-children">-</button>
+                <span id="count-children" style="font-weight:700;min-width:18px;text-align:center">0</span>
+                <button class="counter-btn" id="btn-plus-children">+</button>
+              </div>
+            </div>
+
+            <div class="counter-row" style="border-bottom:none">
+              <div>
+                <div style="font-weight:700;font-size:0.9rem" data-i18n="search.rooms">Rooms / Units</div>
+              </div>
+              <div class="counter-controls">
+                <button class="counter-btn" id="btn-minus-rooms">-</button>
+                <span id="count-rooms" style="font-weight:700;min-width:18px;text-align:center">1</span>
+                <button class="counter-btn" id="btn-plus-rooms">+</button>
+              </div>
+            </div>
+
+            <button class="btn-primary-pill" id="guests-apply-btn" style="width:100%;margin-top:10px;text-align:center" data-i18n="search.apply">Apply</button>
+          </div>
+        </div>
+
+        <!-- Submit Search Button -->
+        <button class="search-submit-btn" id="search-submit-btn" onclick="window.searchEngine.applyFilters()">
+          <span>🔍</span>
+          <span data-i18n="search.searchBtn">Search</span>
+        </button>
+      </div>
+
+      <!-- Sponsored Business Promotions Carousel (Tiered Duration 3s, 5s, 10s) -->
+      <div class="promo-carousel-wrapper" id="promo-carousel">
+        <div class="promo-slide active" data-duration="10000">
+          <img class="promo-img" src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=300&q=80" alt="Kuriftu Resort" />
+          <div class="promo-body">
+            <div class="promo-header">
+              <span class="promo-name">Kuriftu Resort & Spa Bishoftu</span>
+              <span class="promo-tier-badge tier-premium" data-i18n="promotions.tierPremium">Premium Partner (10s)</span>
+            </div>
+            <div class="promo-tagline">Exclusive 15% discount when booked with Telebirr through TripTap. Heated pool & lakefront suites.</div>
+          </div>
+          <button class="promo-cta-btn" onclick="window.app.switchCategory('stays')">Explore Stays</button>
+        </div>
+
+        <div class="promo-slide" data-duration="5000">
+          <img class="promo-img" src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=300&q=80" alt="Ethio 4x4" />
+          <div class="promo-body">
+            <div class="promo-header">
+              <span class="promo-name">Ethio Express 4x4 Rentals</span>
+              <span class="promo-tier-badge tier-standard" data-i18n="promotions.tierStandard">Standard Partner (5s)</span>
+            </div>
+            <div class="promo-tagline">Toyota Land Cruisers & Prado V8 with vetted chauffeurs for Omo Valley & Simien Mountains.</div>
+          </div>
+          <button class="promo-cta-btn" onclick="window.app.switchCategory('wheels')">Rent Wheels</button>
+        </div>
+
+        <div class="promo-slide" data-duration="3000">
+          <img class="promo-img" src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=300&q=80" alt="Coffee Ceremony" />
+          <div class="promo-body">
+            <div class="promo-header">
+              <span class="promo-name">Tomoca Heritage Coffee Tours</span>
+              <span class="promo-tier-badge tier-basic" data-i18n="promotions.tierBasic">Basic Partner (3s)</span>
+            </div>
+            <div class="promo-tagline">Clay pot jebena brewing workshops, frankincense aromas, and coffee bean roasting masterclasses.</div>
+          </div>
+          <button class="promo-cta-btn" onclick="window.app.switchCategory('experiences')">Book Experience</button>
+        </div>
+
+        <!-- Dynamic duration indicator -->
+        <div class="promo-progress-bar">
+          <div class="promo-progress-fill" id="promo-progress-fill"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Main Explore Section -->
+  <main class="container" style="padding-bottom: 60px;">
+    
+    <!-- Ethiopian City Filter Chips (Horizontal Scrollable) -->
+    <div class="city-chips-container" id="city-chips-container"></div>
+
+    <!-- Results Control Bar (Counts, Filters & View Mode Toggles) -->
+    <div class="results-control-bar">
+      <div class="results-stats" id="results-stats-count">Loading places across Ethiopia...</div>
+
+      <div class="results-actions">
+        <!-- Filter Modal Trigger -->
+        <button class="btn-secondary-pill" id="open-filters-btn" style="display:inline-flex;align-items:center;gap:6px">
+          <span>⚙️</span>
+          <span data-i18n="view.filterBtn">Filters</span>
+        </button>
+
+        <!-- View Mode Selector (Grid, Split, Map) -->
+        <div class="view-mode-group">
+          <button class="view-btn" data-view="grid">
+            <span>⊞</span>
+            <span data-i18n="view.grid">Grid</span>
+          </button>
+          <button class="view-btn active" data-view="split">
+            <span>◫</span>
+            <span data-i18n="view.split">Split</span>
+          </button>
+          <button class="view-btn" data-view="map">
+            <span>🗺️</span>
+            <span data-i18n="view.map">Map</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Listings & Map View Container (Split Mode Default) -->
+    <div class="listings-view-container split-mode" id="listings-view-container">
+      
+      <!-- Cards Grid -->
+      <div class="listings-cards-grid" id="listings-cards-grid"></div>
+
+      <!-- Leaflet Interactive Map Container with Custom Price Pins -->
+      <div class="map-container-wrapper" id="map-container-wrapper">
+        <div id="leaflet-map"></div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Mobile Floating Map Switcher -->
+  <button class="floating-map-toggle" id="mobile-map-toggle">
+    <span>🗺️</span>
+    <span data-i18n="view.showMap">Show Map</span>
+  </button>
+
+  <!-- Filter Modal (Price Slider, Ethiopian Travel Essentials, Instant Book) -->
+  <div class="modal-overlay" id="filter-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title" data-i18n="filters.title">Filter Stays, Wheels & Experiences</h3>
+        <button class="modal-close-btn" id="close-filter-modal">✕</button>
+      </div>
+      <div class="modal-body">
+        
+        <!-- Price Range Slider -->
+        <div style="margin-bottom:24px">
+          <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+            <span style="font-weight:700;font-size:0.95rem" data-i18n="filters.priceRange">Price Range (ETB)</span>
+            <span style="font-weight:800;color:var(--blue-primary)" id="filter-price-val">ETB 12,000</span>
+          </div>
+          <input type="range" id="filter-price-slider" min="1000" max="15000" step="500" value="12000" style="width:100%" />
+        </div>
+
+        <!-- Ethiopian Travel Essentials Checkboxes -->
+        <div style="margin-bottom:24px">
+          <div style="font-weight:700;font-size:0.95rem;margin-bottom:12px" data-i18n="filters.amenities">Ethiopian Travel Essentials</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <label style="display:flex;align-items:center;gap:8px;font-size:0.88rem;cursor:pointer">
+              <input type="checkbox" class="filter-amenity-checkbox" value="generator" />
+              <span data-i18n="filters.generator">⚡ Backup Generator (ጀነሬተር)</span>
+            </label>
+            <label style="display:flex;align-items:center;gap:8px;font-size:0.88rem;cursor:pointer">
+              <input type="checkbox" class="filter-amenity-checkbox" value="waterTank" />
+              <span data-i18n="filters.waterTank">💧 Reserve Water Tank (የውሃ ታንከር)</span>
+            </label>
+            <label style="display:flex;align-items:center;gap:8px;font-size:0.88rem;cursor:pointer">
+              <input type="checkbox" class="filter-amenity-checkbox" value="wifi" />
+              <span data-i18n="filters.wifi">📶 High-Speed WiFi</span>
+            </label>
+            <label style="display:flex;align-items:center;gap:8px;font-size:0.88rem;cursor:pointer">
+              <input type="checkbox" class="filter-amenity-checkbox" value="kitchen" />
+              <span data-i18n="filters.kitchen">🍳 Kitchen</span>
+            </label>
+            <label style="display:flex;align-items:center;gap:8px;font-size:0.88rem;cursor:pointer">
+              <input type="checkbox" class="filter-amenity-checkbox" value="ac" />
+              <span data-i18n="filters.ac">❄️ Air Conditioning</span>
+            </label>
+            <label style="display:flex;align-items:center;gap:8px;font-size:0.88rem;cursor:pointer">
+              <input type="checkbox" class="filter-amenity-checkbox" value="security" />
+              <span data-i18n="filters.security">🛡️ 24/7 Gated Security</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:16px;border-top:1px solid var(--border-light)">
+          <button class="btn-secondary-pill" id="reset-filters-btn" data-i18n="filters.reset">Reset All</button>
+          <button class="btn-primary-pill" id="apply-filters-btn" data-i18n="filters.applyFilters">Show Results</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Telebirr Booking Modal (Monopoly Rule, Unique TX-ID, Screenshot) -->
+  <div class="modal-overlay" id="booking-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title" data-i18n="bookingModal.title">Complete Your Telebirr Booking</h3>
+          <p style="font-size:0.75rem;color:var(--telebirr-cyan);font-weight:600" data-i18n="bookingModal.subtitle">Telebirr is the exclusive payment method on TripTap. Zero bank transfers.</p>
+        </div>
+        <button class="modal-close-btn" id="close-booking-modal">✕</button>
+      </div>
+
+      <div class="modal-body">
+        
+        <!-- Summary Box -->
+        <div style="background:var(--bg-ice);border:1px solid var(--blue-border);padding:16px;border-radius:var(--radius-md);margin-bottom:18px">
+          <div style="font-size:0.78rem;font-weight:700;color:var(--text-subtle);text-transform:uppercase" data-i18n="bookingModal.summary">Booking Summary</div>
+          <div style="font-weight:800;font-size:1.1rem;color:var(--text-main);margin:4px 0" id="booking-modal-title">Lakeside Stay</div>
+          <div style="display:flex;justify-content:space-between;margin-top:8px">
+            <span style="font-size:0.85rem;color:var(--text-muted)">Host: <strong id="booking-host-name">Host Name</strong></span>
+            <span style="font-size:0.85rem;color:var(--text-muted)">Host Telebirr: <strong id="booking-host-telebirr">+251 91 123 4567</strong></span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:10px;border-top:1px dashed var(--blue-border)">
+            <span style="font-weight:700" data-i18n="bookingModal.totalAmount">Total Deposit:</span>
+            <span style="font-size:1.3rem;font-weight:800;color:var(--blue-primary)" id="booking-total-amount">ETB 4,500</span>
+          </div>
+        </div>
+
+        <!-- Telebirr Instructions -->
+        <div style="font-size:0.82rem;color:var(--text-muted);line-height:1.6;margin-bottom:18px;background:var(--bg-secondary);padding:12px 16px;border-radius:var(--radius-sm)">
+          <p data-i18n="bookingModal.step1">1. Pay via Telebirr directly to the host number shown above.</p>
+          <p data-i18n="bookingModal.step2">2. Enter the unique Transaction ID provided by Telebirr.</p>
+          <p data-i18n="bookingModal.step3">3. Attach screenshot of the completed Telebirr confirmation screen.</p>
+        </div>
+
+        <!-- Unique Transaction ID Input -->
+        <div style="margin-bottom:16px">
+          <label style="font-size:0.78rem;font-weight:700;color:var(--text-main);display:block;margin-bottom:4px" data-i18n="bookingModal.enterTxId">Unique Telebirr Transaction ID</label>
+          <input type="text" id="telebirr-tx-id" class="form-input" style="width:100%" placeholder="e.g., TBL-8924103820" />
+        </div>
+
+        <!-- Telebirr Receipt Screenshot Upload -->
+        <div style="margin-bottom:20px">
+          <label style="font-size:0.78rem;font-weight:700;color:var(--text-main);display:block;margin-bottom:4px" data-i18n="bookingModal.uploadReceipt">Upload Telebirr Receipt Screenshot</label>
+          <input type="file" id="telebirr-receipt-file" accept="image/*" class="form-input" style="width:100%" />
+          <div id="receipt-preview-container" style="display:none;margin-top:10px;text-align:center">
+            <img id="receipt-preview-img" src="" alt="Receipt Preview" style="max-height:120px;border-radius:6px;border:1px solid var(--border-light);margin:0 auto" />
+          </div>
+        </div>
+
+        <button class="btn-primary-pill" id="submit-telebirr-btn" style="width:100%;padding:14px;font-size:1rem;text-align:center" data-i18n="bookingModal.confirmBooking">
+          Send Payment & Submit Booking
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Permanent In-App Chat Drawer (With 5-Min Timer & 15-Min Property Check) -->
+  <aside class="chat-drawer" id="chat-drawer">
+    <div class="chat-header">
+      <div class="chat-partner-info">
+        <div class="chat-avatar">👤</div>
+        <div>
+          <div class="chat-name" id="chat-partner-name">Host Chat</div>
+          <div class="chat-sub" id="chat-partner-sub">Permanent Compliance Log</div>
+        </div>
+      </div>
+      <button class="icon-btn" id="close-chat-drawer" style="width:32px;height:32px">✕</button>
+    </div>
+
+    <!-- Security notice -->
+    <div class="chat-notice-banner" data-i18n="trustRules.permanentChatNote">
+      🔒 Chat messages & receipts are permanent. Admins monitor for compliance.
+    </div>
+
+    <!-- 5-Minute Host Confirmation Timer Widget -->
+    <div class="trust-timer-widget" id="confirmation-timer-widget">
+      <div class="timer-row">
+        <span class="timer-title" data-i18n="trustRules.confirmationTimerTitle">5-Minute Host Confirmation Timer</span>
+        <span class="timer-clock" id="timer-clock-display">05:00</span>
+      </div>
+      <div id="timer-warning-box" class="timer-warning-box" style="display:none"></div>
+      <button class="btn-report-problem" id="btn-report-problem" style="display:none" data-i18n="trustRules.reportProblemBtn">
+        🚨 Report Problem to Admin
+      </button>
+    </div>
+
+    <!-- 15-Minute Property Check-in Window Widget -->
+    <div class="trust-timer-widget" id="checkin-timer-widget" style="display:none;background:#ecfdf5;border-color:#a7f3d0">
+      <div class="timer-row">
+        <span class="timer-title" style="color:#059669" data-i18n="trustRules.checkInTimerTitle">15-Minute Property Check Window</span>
+        <span class="timer-clock" id="checkin-clock-display" style="color:#059669;border-color:#a7f3d0">15:00</span>
+      </div>
+      <p style="font-size:0.72rem;color:#065f46" data-i18n="trustRules.checkInDesc">Report any mismatch with photo proof within 15 mins of arrival.</p>
+      <button class="btn-secondary-pill" id="btn-report-mismatch" style="padding:4px 8px;font-size:0.75rem;border-color:#a7f3d0;color:#059669" data-i18n="trustRules.reportMismatchBtn">
+        Report Property Mismatch
+      </button>
+    </div>
+
+    <!-- Chat Messages Stream -->
+    <div class="chat-messages-container" id="chat-messages-container"></div>
+
+    <!-- Chat Input Bar -->
+    <div class="chat-input-bar">
+      <input type="text" class="chat-input-field" id="chat-input-field" placeholder="Type a message or questions..." />
+      <button class="chat-send-btn" id="chat-send-btn">➤</button>
+    </div>
+  </aside>
+
+  <!-- "Become a Host" 3-Step Wizard Modal (10k deposit, 5-15 photos, 1-listing limit) -->
+  <div class="modal-overlay" id="host-wizard-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title" data-i18n="hostWizard.title">Host Onboarding Wizard</h3>
+        <button class="modal-close-btn" id="close-host-wizard">✕</button>
+      </div>
+      <div class="modal-body">
+        
+        <!-- Step 1: Listing Details & Photo Rules -->
+        <div class="wizard-step-pane" id="wizard-pane-1">
+          <h4 style="font-weight:700;color:var(--blue-primary);margin-bottom:12px" data-i18n="hostWizard.step1Title">1. Personal & Listing Details</h4>
+          
+          <div class="form-group" style="margin-bottom:12px">
+            <label class="form-label" data-i18n="hostWizard.listingName">Listing Title</label>
+            <input type="text" id="host-input-title" class="form-input" placeholder="e.g., Bole Luxury Penthouse with Generator" />
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+            <div class="form-group">
+              <label class="form-label" data-i18n="hostWizard.city">Ethiopian City</label>
+              <select id="host-input-city" class="form-input">
+                <option value="Addis Ababa">Addis Ababa</option>
+                <option value="Bahir Dar">Bahir Dar</option>
+                <option value="Hawassa">Hawassa</option>
+                <option value="Lalibela">Lalibela</option>
+                <option value="Gondar">Gondar</option>
+                <option value="Bishoftu">Bishoftu</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" data-i18n="hostWizard.price">Price in ETB</label>
+              <input type="number" id="host-input-price" class="form-input" placeholder="5000" />
+            </div>
+          </div>
+
+          <!-- Photo Rule: Min 5, Max 15 -->
+          <div class="form-group" style="margin-bottom:16px;background:var(--bg-ice);padding:14px;border-radius:var(--radius-sm);border:1px solid var(--blue-border)">
+            <label class="form-label" style="color:var(--blue-primary)" data-i18n="hostWizard.photosLabel">Listing Photos (Min 5, Max 15)</label>
+            <p style="font-size:0.75rem;color:var(--text-muted);margin-bottom:8px" data-i18n="hostWizard.photosHelp">You must upload at least 5 photos to publish. (Draft mode saved otherwise).</p>
+            <input type="file" id="host-photos-input" multiple accept="image/*" class="form-input" />
+            <div id="photos-count-indicator" style="font-size:0.8rem;font-weight:700;margin-top:6px;color:#ef4444">0 photos uploaded (Requires 5 minimum)</div>
+            <button type="button" class="btn-secondary-pill" id="quick-add-5-photos" style="margin-top:8px;padding:4px 10px;font-size:0.75rem">⚡ Demo: Attach 5 Verified Photos</button>
+          </div>
+        </div>
+
+        <!-- Step 2: Telebirr 10,000 ETB Security Deposit -->
+        <div class="wizard-step-pane" id="wizard-pane-2" style="display:none">
+          <h4 style="font-weight:700;color:var(--blue-primary);margin-bottom:12px" data-i18n="hostWizard.step2Title">2. Telebirr Security Deposit (10,000 ETB)</h4>
+          <div style="background:var(--bg-ice);border:1px solid var(--blue-border);padding:16px;border-radius:var(--radius-sm);margin-bottom:14px">
+            <span class="badge-telebirr">Telebirr Exclusive</span>
+            <p style="font-size:0.82rem;color:var(--text-main);margin-top:6px" data-i18n="hostWizard.depositNotice">
+              TripTap requires a 10,000 ETB security deposit via Telebirr Merchant Account to activate listings and fund the safety wallet.
+            </p>
+          </div>
+
+          <div class="form-group" style="margin-bottom:12px">
+            <label class="form-label" data-i18n="hostWizard.depositTxId">Telebirr Deposit Transaction ID</label>
+            <input type="text" id="host-deposit-txid" class="form-input" placeholder="TBL-7729104812" />
+          </div>
+
+          <div class="form-group" style="margin-bottom:12px">
+            <label class="form-label" data-i18n="hostWizard.depositReceipt">Telebirr Deposit Receipt Screenshot</label>
+            <input type="file" accept="image/*" class="form-input" />
+          </div>
+
+          <p style="font-size:0.75rem;color:var(--text-subtle)" data-i18n="hostWizard.phoneMatchNote">
+            Note: Admin will verify your account phone number against your Telebirr sender phone number.
+          </p>
+        </div>
+
+        <!-- Step 3: Terms & 1-Listing Limit Acceptance -->
+        <div class="wizard-step-pane" id="wizard-pane-3" style="display:none">
+          <h4 style="font-weight:700;color:var(--blue-primary);margin-bottom:12px" data-i18n="hostWizard.step3Title">3. Terms & KYC Acceptance</h4>
+          <div style="background:var(--bg-secondary);padding:14px;border-radius:var(--radius-sm);font-size:0.82rem;line-height:1.6;margin-bottom:14px">
+            <p>• <strong>1-Listing Limit:</strong> Each host can only have 1 active listing in Version 1.</p>
+            <p>• <strong>5-Minute Rule:</strong> Host must review and confirm bookings within 5 minutes of receipt.</p>
+            <p>• <strong>10% Flat Commission:</strong> Deducted from host Telebirr wallet upon booking confirmation.</p>
+            <p>• <strong>Wallet Thresholds:</strong> Low balance warning at 5,000 ETB; auto-frozen at 3,000 ETB.</p>
+            <p>• <strong>3-Strike Rule:</strong> 3 upheld disputes result in permanent suspension & police referral.</p>
+          </div>
+          <label style="display:flex;align-items:center;gap:8px;font-size:0.85rem;cursor:pointer">
+            <input type="checkbox" id="terms-agree-check" checked />
+            <span>I agree to TripTap's Host Terms, Telebirr rules & KYC verification.</span>
+          </label>
+        </div>
+
+        <!-- Wizard Navigation Controls -->
+        <div style="display:flex;justify-content:space-between;margin-top:20px;padding-top:14px;border-top:1px solid var(--border-light)">
+          <button class="btn-secondary-pill" id="wizard-prev-btn" style="display:none" data-i18n="hostWizard.prev">← Previous</button>
+          <button class="btn-primary-pill" id="wizard-next-btn" style="margin-left:auto" data-i18n="hostWizard.next">Next Step →</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Host Control Dashboard Modal (Wallet, 10% Commission, 3-Status Toggle) -->
+  <div class="modal-overlay" id="host-dashboard-modal">
+    <div class="modal-box" style="max-width:760px">
+      <div class="modal-header">
+        <h3 class="modal-title" data-i18n="hostDashboard.title">Host Control Dashboard</h3>
+        <button class="modal-close-btn" id="close-host-dashboard">✕</button>
+      </div>
+
+      <div class="modal-body">
+        
+        <!-- Live Telebirr Wallet Status Cards -->
+        <div class="wallet-grid">
+          <div class="wallet-card" id="host-wallet-card-container">
+            <span class="phone-label" data-i18n="hostDashboard.walletBalance">Telebirr Wallet Balance</span>
+            <div class="wallet-amount" id="host-wallet-balance-num">ETB 10,000</div>
+            <div id="host-wallet-status-box"></div>
+            <button class="btn-secondary-pill" id="btn-topup-wallet" style="margin-top:10px" data-i18n="hostDashboard.topUpBtn">
+              Top Up Telebirr Wallet
+            </button>
+          </div>
+
+          <!-- 3-Status Listing Toggle -->
+          <div class="wallet-card">
+            <span class="phone-label" data-i18n="hostDashboard.listingStatus">Listing Status (Version 1)</span>
+            <select class="form-input" id="listing-status-select" style="font-weight:700;margin-top:6px">
+              <option value="Available" data-i18n="hostDashboard.statusAvailable">Available (Active in search)</option>
+              <option value="Booked" data-i18n="hostDashboard.statusBooked">Booked</option>
+              <option value="On Maintenance" data-i18n="hostDashboard.statusMaintenance">On Maintenance (Hidden from search)</option>
+            </select>
+            <p style="font-size:0.75rem;color:var(--text-muted);margin-top:8px">
+              "On Maintenance" instantly hides the listing from all traveler searches without deleting it.
+            </p>
+            <button class="btn-primary-pill" id="btn-demo-host-confirm" style="margin-top:10px;font-size:0.78rem">
+              ⚡ Demo: Host Confirms Active Booking
+            </button>
+          </div>
+        </div>
+
+        <!-- Commission notice -->
+        <div style="background:var(--bg-ice);border:1px solid var(--blue-border);padding:12px;border-radius:var(--radius-sm);font-size:0.78rem;color:var(--blue-primary)" data-i18n="hostDashboard.commissionNotice">
+          TripTap automatically deducts 10% commission on each confirmed booking from this wallet.
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Headquarters Portal Modal (Roles, Phone Match, Walk-in, Audit Log) -->
+  <div class="modal-overlay" id="admin-portal-modal">
+    <div class="modal-box" style="max-width:880px">
+      <div class="modal-header">
+        <h3 class="modal-title" data-i18n="adminPortal.title">TripTap Admin Headquarters</h3>
+        <button class="modal-close-btn" id="close-admin-portal">✕</button>
+      </div>
+
+      <div class="modal-body">
+        
+        <!-- Admin Header Strip with Role Switcher -->
+        <div class="admin-header-strip">
+          <div class="admin-role-badge">
+            <span>🛡️ Active:</span>
+            <span id="current-role-badge-text">Super Admin (Founder)</span>
+          </div>
+
+          <select class="admin-role-select" id="admin-role-select">
+            <option value="superAdmin">Super Admin (Founder) — Full Access & Audit</option>
+            <option value="admin">Admin — Applications, Walk-in & Ads</option>
+            <option value="supportAgent">Support Agent — Disputes & Safety Chats</option>
+            <option value="financeManager">Finance Manager — Telebirr Wallets</option>
+            <option value="listingsModerator">Listings Moderator — Moderation</option>
+          </select>
+        </div>
+
+        <!-- Admin Sub-tabs -->
+        <div class="admin-tabs-nav">
+          <button class="admin-tab-btn active" data-tab="applications" data-i18n="adminPortal.tabs.applications">Host Applications</button>
+          <button class="admin-tab-btn" data-tab="walkIn" data-i18n="adminPortal.tabs.walkIn">Walk-in Host Registration</button>
+          <button class="admin-tab-btn" data-tab="audit" data-i18n="adminPortal.tabs.audit">Tamper-Proof Audit Log</button>
+        </div>
+
+        <!-- Applications Tab (With Phone Match Indicator) -->
+        <div class="admin-tab-pane" id="tab-pane-applications">
+          <div id="host-applications-list"></div>
+        </div>
+
+        <!-- Walk-in Host Registration Tab (TripTap Office) -->
+        <div class="admin-tab-pane" id="tab-pane-walkIn" style="display:none">
+          <h4 style="font-weight:700;color:var(--text-main)" data-i18n="adminPortal.walkInTitle">Register In-Person Walk-in Host</h4>
+          <p style="font-size:0.8rem;color:var(--text-subtle);margin-bottom:12px" data-i18n="adminPortal.walkInDesc">
+            Directly creates both a user account and approved host profile simultaneously for office visitors.
+          </p>
+
+          <div class="walkin-form-grid">
+            <div class="form-group">
+              <label class="form-label">Host Full Name</label>
+              <input type="text" id="walkin-name" class="form-input" placeholder="e.g., Belete Fikre" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone & Telebirr Number</label>
+              <input type="text" id="walkin-phone" class="form-input" placeholder="+251 91 234 5678" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">ID Type Verified</label>
+              <select id="walkin-id-type" class="form-input">
+                <option value="Ethiopian National ID">Ethiopian National ID (Fayda / Kebele)</option>
+                <option value="Passport">Passport</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Initial Listing Title</label>
+              <input type="text" id="walkin-listing-title" class="form-input" placeholder="Bole Apartment Unit" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">City</label>
+              <select id="walkin-city" class="form-input">
+                <option value="Addis Ababa">Addis Ababa</option>
+                <option value="Bahir Dar">Bahir Dar</option>
+                <option value="Hawassa">Hawassa</option>
+              </select>
+            </div>
+            <div class="form-group" style="justify-content:flex-end">
+              <button class="btn-primary-pill" id="walkin-submit-btn" style="margin-top:20px;text-align:center">
+                Create & Activate Host Instantly
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tamper-Proof Audit Log Tab -->
+        <div class="admin-tab-pane" id="tab-pane-audit" style="display:none">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+            <span style="font-size:0.78rem;color:var(--text-subtle)" data-i18n="adminPortal.auditNote">Audit log is append-only and cryptographically write-only. No deletion permitted.</span>
+            <span class="badge-trust">🔒 Tamper-Proof Log</span>
+          </div>
+
+          <div class="audit-table-wrapper">
+            <table class="audit-table">
+              <thead>
+                <tr>
+                  <th>Log ID</th>
+                  <th>Permission Role</th>
+                  <th>Action Executed</th>
+                  <th>Timestamp</th>
+                  <th>Integrity</th>
+                </tr>
+              </thead>
+              <tbody id="audit-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notifications Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Site Footer -->
+  <footer style="background:var(--bg-secondary);border-top:1px solid var(--border-light);padding:40px 0;margin-top:auto">
+    <div class="container" style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;font-size:0.85rem">
+      <div>
+        <div style="font-size:1.3rem;font-weight:800;color:var(--blue-primary);margin-bottom:6px">⚡ TripTap</div>
+        <p style="color:var(--text-subtle)">Addis Ababa, Ethiopia · www.triptap.et</p>
+        <p style="color:var(--text-subtle)">Admin: admin.triptap.et · Support: support@triptap.et</p>
+      </div>
+
+      <div>
+        <div style="font-weight:700;margin-bottom:8px">Telebirr Monopoly</div>
+        <p style="color:var(--text-subtle);max-width:320px">
+          Telebirr is the exclusive payment method across TripTap. 100% verified hosts with security deposits.
+        </p>
+      </div>
+
+      <div>
+        <div style="font-weight:700;margin-bottom:8px">Languages</div>
+        <p style="color:var(--text-subtle)">English · አማርኛ · العربية</p>
+        <p style="color:var(--text-subtle);margin-top:8px">© 2026 TripTap Ethiopia. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <!-- TripTap Application Core Modules -->
+  <script src="js/translations.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/booking.js"></script>
+  <script src="js/host.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/chat.js"></script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+/* ========================================================
+   TRIPTAP — MAP STYLING (Leaflet Customization)
+   White & Blue Price Marker Pins
+   ======================================================== */
+
+.map-container-wrapper {
+  position: relative;
+  width: 100%;
+  background: var(--bg-secondary);
+}
+
+#leaflet-map {
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+}
+
+/* Custom Blue Price Marker Pin */
+.custom-price-pin {
+  background: #ffffff;
+  color: var(--blue-primary);
+  font-weight: 800;
+  font-size: 0.8rem;
+  padding: 5px 10px;
+  border-radius: var(--radius-full);
+  box-shadow: 0 3px 10px rgba(15, 23, 42, 0.22);
+  border: 1.5px solid var(--blue-primary);
+  white-space: nowrap;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.custom-price-pin:hover, .custom-price-pin.active {
+  background: var(--blue-primary);
+  color: #ffffff;
+  transform: translate(-50%, -50%) scale(1.15);
+  box-shadow: 0 6px 18px rgba(29, 78, 216, 0.45);
+  z-index: 1000 !important;
+}
+
+/* Custom Leaflet Popup */
+.leaflet-popup-content-wrapper {
+  padding: 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--blue-border);
+  background: var(--bg-card);
+}
+
+.leaflet-popup-content {
+  margin: 0 !important;
+  line-height: inherit;
+  width: 250px !important;
+}
+
+.map-popup-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.map-popup-img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+
+.map-popup-body {
+  padding: 12px;
+}
+
+.map-popup-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.map-popup-price {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--blue-primary);
+  margin-bottom: 6px;
+}
+
+.map-popup-link {
+  display: block;
+  text-align: center;
+  padding: 6px;
+  background: var(--blue-light);
+  color: var(--blue-primary);
+  font-weight: 700;
+  font-size: 0.78rem;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.map-popup-link:hover {
+  background: var(--blue-primary);
+  color: #ffffff;
+}
+
+/* Floating Map Toggle Button for Mobile */
+.floating-map-toggle {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 500;
+  background: #0f172a;
+  color: #ffffff;
+  padding: 12px 22px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: none;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  transition: all var(--transition-fast);
+}
+
+.floating-map-toggle:hover {
+  background: var(--blue-primary);
+  transform: translateX(-50%) scale(1.04);
+}
+
+@media (max-width: 900px) {
+  .floating-map-toggle {
+    display: inline-flex;
+  }
+}
