@@ -10,11 +10,2060 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 
   <!-- TripTap Design System (White & Blue Aesthetic) -->
-  <link rel="stylesheet" href="css/main.css" />
-  <link rel="stylesheet" href="css/components.css" />
-  <link rel="stylesheet" href="css/map.css" />
-  <link rel="stylesheet" href="css/chat.css" />
-  <link rel="stylesheet" href="css/admin.css" />
+  
+  
+  
+  
+  
+<style>
+
+/* === INLINED css/main.css === */
+/* ========================================================
+   TRIPTAP — ETHIOPIA TRAVEL MARKETPLACE
+   Design System: White & Blue Aesthetic
+   ======================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Noto+Sans+Ethiopic:wght@400;500;600;700&family=Cairo:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* White & Blue Color Palette */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-ice: #f0f7ff;
+  --bg-ice-subtle: #f5f9ff;
+  --bg-card: #ffffff;
+  --bg-surface: #ffffff;
+
+  /* Royal & Deep Blue Accents */
+  --blue-primary: #1d4ed8;       /* Royal Blue */
+  --blue-hover: #1e40af;
+  --blue-active: #172554;
+  --blue-accent: #2563eb;       /* Electric/Vibrant Blue */
+  --blue-light: #eff6ff;
+  --blue-border: #bfdbfe;
+  --blue-glow: rgba(37, 99, 235, 0.22);
+  --blue-sky: #38bdf8;
+
+  /* Telebirr Brand Colors */
+  --telebirr-cyan: #0284c7;
+  --telebirr-bg: #e0f2fe;
+  --telebirr-border: #7dd3fc;
+
+  /* Neutrals & Text */
+  --text-main: #0f172a;        /* Deep Navy Black */
+  --text-muted: #475569;       /* Slate Grey */
+  --text-subtle: #64748b;
+  --border-light: #e2e8f0;
+  --border-card: #e2e8f0;
+  
+  /* Status Colors */
+  --success: #10b981;
+  --success-bg: #ecfdf5;
+  --warning: #f59e0b;
+  --warning-bg: #fffbeb;
+  --danger: #ef4444;
+  --danger-bg: #fef2f2;
+
+  /* Elevations & Shadows */
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 4px 14px -1px rgba(15, 76, 129, 0.08), 0 2px 6px -1px rgba(15, 76, 129, 0.04);
+  --shadow-lg: 0 12px 30px -4px rgba(29, 78, 216, 0.12), 0 4px 12px -2px rgba(15, 23, 42, 0.05);
+  --shadow-glow: 0 0 25px rgba(37, 99, 235, 0.25);
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  --font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-ethiopic: 'Noto Sans Ethiopic', 'Outfit', sans-serif;
+  --font-arabic: 'Cairo', 'Outfit', sans-serif;
+
+  --transition-fast: 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark Mode Override (Midnight Blue Canvas) */
+[data-theme="dark"] {
+  --bg-primary: #070d1e;
+  --bg-secondary: #0c162f;
+  --bg-ice: #112247;
+  --bg-ice-subtle: #0f1c3d;
+  --bg-card: #0e1b38;
+  --bg-surface: #132247;
+
+  --blue-primary: #3b82f6;
+  --blue-hover: #60a5fa;
+  --blue-active: #93c5fd;
+  --blue-accent: #38bdf8;
+  --blue-light: #172a54;
+  --blue-border: #1e3a70;
+  --blue-glow: rgba(59, 130, 246, 0.35);
+
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-subtle: #cbd5e1;
+  --border-light: #1e293b;
+  --border-card: #1e3a70;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.65);
+}
+
+/* Reset & Base Setup */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+/* Amharic & Arabic Font Adaptations */
+[lang="am"] body, [lang="am"] * {
+  font-family: var(--font-ethiopic), var(--font-family);
+}
+
+[lang="ar"] body, [lang="ar"] * {
+  font-family: var(--font-arabic), var(--font-family);
+}
+
+[dir="rtl"] {
+  text-align: right;
+}
+
+a {
+  color: var(--blue-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+button {
+  cursor: pointer;
+  user-select: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+}
+
+/* Utility Badges */
+.badge-telebirr {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background-color: var(--telebirr-bg);
+  color: var(--telebirr-cyan);
+  border: 1px solid var(--telebirr-border);
+  font-weight: 600;
+  font-size: 0.75rem;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+}
+
+.badge-trust {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background-color: #ecfdf5;
+  color: #059669;
+  border: 1px solid #a7f3d0;
+  font-weight: 600;
+  font-size: 0.75rem;
+  padding: 3px 9px;
+  border-radius: var(--radius-full);
+}
+
+[data-theme="dark"] .badge-trust {
+  background-color: rgba(5, 150, 105, 0.15);
+  border-color: rgba(5, 150, 105, 0.3);
+  color: #34d399;
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--blue-border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--blue-primary);
+}
+
+
+/* === INLINED css/components.css === */
+/* ========================================================
+   TRIPTAP — UI COMPONENTS
+   White & Blue Theme Styling
+   ======================================================== */
+
+/* --- Navigation Header --- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-light);
+  transition: all var(--transition-fast);
+}
+
+[data-theme="dark"] .site-header {
+  background-color: rgba(7, 13, 30, 0.9);
+  border-bottom-color: var(--border-light);
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 74px;
+}
+
+.brand-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: var(--blue-primary);
+  letter-spacing: -0.02em;
+}
+
+.brand-logo .logo-icon {
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, var(--blue-primary), var(--blue-accent));
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  font-size: 1.25rem;
+  box-shadow: 0 4px 12px rgba(29, 78, 216, 0.3);
+}
+
+.brand-tagline {
+  font-size: 0.72rem;
+  color: var(--text-subtle);
+  font-weight: 500;
+  border-left: 1px solid var(--border-light);
+  padding-left: 10px;
+}
+
+[dir="rtl"] .brand-tagline {
+  border-left: none;
+  border-right: 1px solid var(--border-light);
+  padding-left: 0;
+  padding-right: 10px;
+}
+
+/* Category Tabs (Stays, Wheels, Experiences) */
+.category-tabs-nav {
+  display: flex;
+  align-items: center;
+  background-color: var(--bg-ice);
+  border: 1px solid var(--blue-border);
+  padding: 4px;
+  border-radius: var(--radius-full);
+}
+
+.category-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  border-radius: var(--radius-full);
+  transition: all var(--transition-fast);
+}
+
+.category-tab-btn:hover {
+  color: var(--blue-primary);
+}
+
+.category-tab-btn.active {
+  background-color: var(--blue-primary);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(29, 78, 216, 0.3);
+}
+
+/* Nav Actions (Languages, Theme, Wishlist, Host, Admin, Auth) */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.lang-selector {
+  display: flex;
+  align-items: center;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-full);
+  padding: 3px 6px;
+  gap: 2px;
+}
+
+.lang-btn {
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  color: var(--text-muted);
+  transition: all var(--transition-fast);
+}
+
+.lang-btn.active {
+  background-color: var(--blue-primary);
+  color: #ffffff;
+}
+
+.icon-btn {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  color: var(--text-main);
+  position: relative;
+  transition: all var(--transition-fast);
+}
+
+.icon-btn:hover {
+  background-color: var(--blue-light);
+  border-color: var(--blue-border);
+  color: var(--blue-primary);
+}
+
+.icon-badge {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  background-color: var(--blue-primary);
+  color: #ffffff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}
+
+.btn-secondary-pill {
+  padding: 8px 16px;
+  background-color: var(--blue-light);
+  border: 1px solid var(--blue-border);
+  color: var(--blue-primary);
+  font-weight: 600;
+  font-size: 0.85rem;
+  border-radius: var(--radius-full);
+  transition: all var(--transition-fast);
+}
+
+.btn-secondary-pill:hover {
+  background-color: var(--blue-primary);
+  color: #ffffff;
+}
+
+.btn-primary-pill {
+  padding: 9px 18px;
+  background: linear-gradient(135deg, var(--blue-primary), var(--blue-accent));
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.86rem;
+  border-radius: var(--radius-full);
+  box-shadow: 0 2px 10px rgba(29, 78, 216, 0.25);
+  transition: all var(--transition-fast);
+}
+
+.btn-primary-pill:hover {
+  box-shadow: 0 4px 16px rgba(29, 78, 216, 0.4);
+  transform: translateY(-1px);
+}
+
+/* --- Hero Section & Dynamic Blurred Gradient --- */
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  padding: 44px 0 28px;
+  background: var(--bg-primary);
+  transition: background var(--transition-normal);
+}
+
+.hero-gradient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 0;
+  transition: all 0.6s ease;
+}
+
+.orb-1 {
+  width: 480px;
+  height: 480px;
+  background: #3b82f6;
+  top: -120px;
+  left: 10%;
+}
+
+.orb-2 {
+  width: 420px;
+  height: 420px;
+  background: #60a5fa;
+  top: -60px;
+  right: 12%;
+}
+
+/* Stays gradient styling */
+.hero-section[data-category="stays"] .orb-1 {
+  background: #2563eb;
+}
+.hero-section[data-category="stays"] .orb-2 {
+  background: #38bdf8;
+}
+
+/* Wheels gradient styling */
+.hero-section[data-category="wheels"] .orb-1 {
+  background: #0284c7;
+}
+.hero-section[data-category="wheels"] .orb-2 {
+  background: #0ea5e9;
+}
+
+/* Experiences gradient styling */
+.hero-section[data-category="experiences"] .orb-1 {
+  background: #4338ca;
+}
+.hero-section[data-category="experiences"] .orb-2 {
+  background: #3b82f6;
+}
+
+[data-theme="dark"] .hero-gradient-orb {
+  opacity: 0.18;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.hero-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  background-color: var(--blue-light);
+  border: 1px solid var(--blue-border);
+  color: var(--blue-primary);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: var(--radius-full);
+  margin-bottom: 16px;
+}
+
+.hero-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+  line-height: 1.5;
+}
+
+/* --- Search Engine & Bar --- */
+.search-bar-wrapper {
+  background: var(--bg-card);
+  border: 1px solid var(--blue-border);
+  box-shadow: 0 8px 30px rgba(15, 76, 129, 0.12);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  max-width: 920px;
+  margin: 0 auto 28px;
+  position: relative;
+  z-index: 20;
+}
+
+.search-field-segment {
+  flex: 1;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: var(--radius-full);
+  transition: background var(--transition-fast);
+  position: relative;
+}
+
+.search-field-segment:hover {
+  background-color: var(--bg-ice);
+}
+
+.search-field-segment:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 25%;
+  height: 50%;
+  width: 1px;
+  background-color: var(--border-light);
+}
+
+[dir="rtl"] .search-field-segment:not(:last-child)::after {
+  right: auto;
+  left: 0;
+}
+
+.segment-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+  letter-spacing: 0.05em;
+  margin-bottom: 2px;
+}
+
+.segment-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.search-submit-btn {
+  background: linear-gradient(135deg, var(--blue-primary), var(--blue-accent));
+  color: #ffffff;
+  height: 50px;
+  padding: 0 24px;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 14px rgba(29, 78, 216, 0.35);
+  transition: all var(--transition-fast);
+}
+
+.search-submit-btn:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 20px rgba(29, 78, 216, 0.45);
+}
+
+/* --- Popovers (Where, Calendar, Guests) --- */
+.popover-card {
+  position: absolute;
+  top: calc(100% + 14px);
+  background: var(--bg-card);
+  border: 1px solid var(--blue-border);
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  z-index: 100;
+  display: none;
+  animation: popoverFade 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.popover-card.open {
+  display: block;
+}
+
+@keyframes popoverFade {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Where Popover */
+.where-popover {
+  left: 20px;
+  width: 320px;
+}
+[dir="rtl"] .where-popover {
+  left: auto;
+  right: 20px;
+}
+
+.city-search-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  background: var(--bg-secondary);
+  color: var(--text-main);
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.city-options-list {
+  max-height: 220px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.city-option-item {
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.city-option-item:hover {
+  background-color: var(--bg-ice);
+  color: var(--blue-primary);
+}
+
+/* Calendar Popover */
+.calendar-popover {
+  left: 50%;
+  transform: translateX(-50%);
+  width: 360px;
+}
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.cal-month-title {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.calendar-days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  text-align: center;
+}
+
+.cal-day-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-subtle);
+  padding: 4px 0;
+}
+
+.cal-day-cell {
+  padding: 8px 0;
+  font-size: 0.85rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.cal-day-cell:hover:not(.disabled) {
+  background-color: var(--blue-light);
+  color: var(--blue-primary);
+}
+
+.cal-day-cell.selected {
+  background-color: var(--blue-primary) !important;
+  color: #ffffff !important;
+  font-weight: 700;
+}
+
+.cal-day-cell.range {
+  background-color: var(--bg-ice);
+  color: var(--blue-primary);
+}
+
+.cal-day-cell.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Guests Popover */
+.guests-popover {
+  right: 20px;
+  width: 300px;
+}
+[dir="rtl"] .guests-popover {
+  right: auto;
+  left: 20px;
+}
+
+.counter-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.counter-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.counter-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border-light);
+  background: var(--bg-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--text-main);
+  transition: all var(--transition-fast);
+}
+
+.counter-btn:hover {
+  border-color: var(--blue-primary);
+  color: var(--blue-primary);
+}
+
+/* --- Sponsored Business Promotions Carousel (Tiered Duration 3s, 5s, 10s) --- */
+.promo-carousel-wrapper {
+  max-width: 920px;
+  margin: 0 auto 32px;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--blue-border);
+  background: linear-gradient(135deg, var(--bg-ice), var(--bg-card));
+  box-shadow: var(--shadow-sm);
+}
+
+.promo-slide {
+  display: none;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 20px;
+  animation: promoSlideIn 0.35s ease-out;
+}
+
+.promo-slide.active {
+  display: flex;
+}
+
+@keyframes promoSlideIn {
+  from { opacity: 0; transform: translateX(12px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.promo-img {
+  width: 90px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+}
+
+.promo-body {
+  flex: 1;
+}
+
+.promo-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.promo-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-main);
+}
+
+.promo-tier-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+.tier-premium {
+  background: #fef3c7;
+  color: #b45309;
+  border: 1px solid #fde68a;
+}
+
+.tier-standard {
+  background: var(--blue-light);
+  color: var(--blue-primary);
+  border: 1px solid var(--blue-border);
+}
+
+.tier-basic {
+  background: var(--bg-secondary);
+  color: var(--text-muted);
+  border: 1px solid var(--border-light);
+}
+
+.promo-tagline {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.promo-cta-btn {
+  padding: 7px 16px;
+  background: var(--blue-primary);
+  color: #ffffff;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+
+.promo-cta-btn:hover {
+  background: var(--blue-hover);
+}
+
+.promo-progress-bar {
+  height: 3px;
+  background: var(--blue-border);
+  position: relative;
+  overflow: hidden;
+}
+
+.promo-progress-fill {
+  height: 100%;
+  background: var(--blue-primary);
+  width: 0%;
+  transition: width linear;
+}
+
+/* --- Ethiopian City Filter Chips (Horizontal Scrollable) --- */
+.city-chips-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 8px 0 20px;
+  scrollbar-width: none;
+}
+
+.city-chips-container::-webkit-scrollbar {
+  display: none;
+}
+
+.city-chip {
+  padding: 8px 18px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all var(--transition-fast);
+}
+
+.city-chip:hover {
+  border-color: var(--blue-border);
+  color: var(--blue-primary);
+  background-color: var(--bg-ice);
+}
+
+.city-chip.active {
+  background-color: var(--blue-primary);
+  border-color: var(--blue-primary);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(29, 78, 216, 0.3);
+}
+
+/* --- Main Results Controls & View Toggle --- */
+.results-control-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.results-stats {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.results-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.view-mode-group {
+  display: flex;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-full);
+  padding: 3px;
+}
+
+.view-btn {
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all var(--transition-fast);
+}
+
+.view-btn.active {
+  background-color: var(--bg-card);
+  color: var(--blue-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+/* --- Listings Grid & Split View --- */
+.listings-view-container {
+  display: flex;
+  gap: 24px;
+  position: relative;
+  min-height: 600px;
+}
+
+.listings-cards-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 24px;
+  transition: all var(--transition-normal);
+}
+
+/* Split View State */
+.listings-view-container.split-mode .listings-cards-grid {
+  flex: 0 0 54%;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  max-height: 800px;
+  overflow-y: auto;
+  padding-right: 12px;
+}
+
+.listings-view-container.split-mode .map-container-wrapper {
+  flex: 0 0 44%;
+  display: block !important;
+  height: 800px;
+  position: sticky;
+  top: 90px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--blue-border);
+}
+
+/* Map Only View */
+.listings-view-container.map-only .listings-cards-grid {
+  display: none;
+}
+
+.listings-view-container.map-only .map-container-wrapper {
+  flex: 1;
+  display: block !important;
+  height: 750px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--blue-border);
+}
+
+/* Grid Only View */
+.listings-view-container.grid-only .map-container-wrapper {
+  display: none !important;
+}
+
+/* --- Listing Card Item --- */
+.listing-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.listing-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--blue-border);
+}
+
+.listing-card.highlighted {
+  border-color: var(--blue-primary);
+  box-shadow: 0 0 0 2px var(--blue-primary), var(--shadow-lg);
+}
+
+/* Card Photo Gallery & Carousel */
+.card-media-wrapper {
+  position: relative;
+  height: 220px;
+  background-color: var(--bg-secondary);
+  overflow: hidden;
+}
+
+.card-img-slide {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.25s ease;
+}
+
+.carousel-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  opacity: 0;
+  transition: opacity 0.2s, background 0.15s;
+  z-index: 5;
+}
+
+.listing-card:hover .carousel-nav-btn {
+  opacity: 1;
+}
+
+.carousel-nav-btn:hover {
+  background: #ffffff;
+  color: var(--blue-primary);
+}
+
+.carousel-prev { left: 10px; }
+.carousel-next { right: 10px; }
+
+.carousel-dots {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+  z-index: 5;
+}
+
+.carousel-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  transition: all 0.2s;
+}
+
+.carousel-dot.active {
+  background: #ffffff;
+  width: 14px;
+  border-radius: 3px;
+}
+
+/* Wishlist Heart Button */
+.card-wishlist-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  z-index: 6;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.15s;
+}
+
+.card-wishlist-btn:hover {
+  transform: scale(1.15);
+  color: #ef4444;
+}
+
+.card-wishlist-btn.active {
+  color: #ef4444;
+  fill: #ef4444;
+}
+
+.card-badge-container {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  gap: 6px;
+  z-index: 6;
+}
+
+[dir="rtl"] .card-badge-container {
+  left: auto;
+  right: 12px;
+}
+[dir="rtl"] .card-wishlist-btn {
+  right: auto;
+  left: 12px;
+}
+
+/* Card Body Content */
+.card-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.card-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.card-location {
+  font-size: 0.82rem;
+  color: var(--text-subtle);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.card-rating-badge {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.card-rating-badge span.star {
+  color: #f59e0b;
+}
+
+.card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.35;
+  margin-bottom: 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Ethiopian Essentials Amenities Pills */
+.card-amenities-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.amenity-pill {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  background-color: var(--bg-ice);
+  color: var(--blue-primary);
+  border-radius: var(--radius-full);
+}
+
+.card-footer-row {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-light);
+}
+
+.card-price-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-price-num {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--blue-primary);
+}
+
+.card-price-label {
+  font-size: 0.72rem;
+  color: var(--text-subtle);
+}
+
+.card-book-action-btn {
+  padding: 8px 16px;
+  background: var(--blue-primary);
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all var(--transition-fast);
+}
+
+.card-book-action-btn:hover {
+  background: var(--blue-hover);
+}
+
+/* --- Modals & Overlays --- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(6px);
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-overlay.open {
+  display: flex;
+}
+
+.modal-box {
+  background: var(--bg-card);
+  border: 1px solid var(--blue-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  width: 100%;
+  max-width: 680px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: modalScaleUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalScaleUp {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.modal-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.modal-close-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  background: var(--bg-secondary);
+  transition: all var(--transition-fast);
+}
+
+.modal-close-btn:hover {
+  background: var(--blue-light);
+  color: var(--blue-primary);
+}
+
+.modal-body {
+  padding: 24px;
+}
+
+/* --- Toast Notifications --- */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 3000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+
+[dir="rtl"] .toast-container {
+  right: auto;
+  left: 24px;
+}
+
+.toast-msg {
+  background: #0f172a;
+  color: #ffffff;
+  padding: 12px 20px;
+  border-radius: var(--radius-md);
+  font-size: 0.88rem;
+  font-weight: 500;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  pointer-events: auto;
+  animation: toastIn 0.3s ease;
+  border-left: 4px solid var(--blue-primary);
+}
+
+[dir="rtl"] .toast-msg {
+  border-left: none;
+  border-right: 4px solid var(--blue-primary);
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* === INLINED css/map.css === */
+/* ========================================================
+   TRIPTAP — MAP STYLING (Leaflet Customization)
+   White & Blue Price Marker Pins
+   ======================================================== */
+
+.map-container-wrapper {
+  position: relative;
+  width: 100%;
+  background: var(--bg-secondary);
+}
+
+#leaflet-map {
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+}
+
+/* Custom Blue Price Marker Pin */
+.custom-price-pin {
+  background: #ffffff;
+  color: var(--blue-primary);
+  font-weight: 800;
+  font-size: 0.8rem;
+  padding: 5px 10px;
+  border-radius: var(--radius-full);
+  box-shadow: 0 3px 10px rgba(15, 23, 42, 0.22);
+  border: 1.5px solid var(--blue-primary);
+  white-space: nowrap;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.custom-price-pin:hover, .custom-price-pin.active {
+  background: var(--blue-primary);
+  color: #ffffff;
+  transform: translate(-50%, -50%) scale(1.15);
+  box-shadow: 0 6px 18px rgba(29, 78, 216, 0.45);
+  z-index: 1000 !important;
+}
+
+/* Custom Leaflet Popup */
+.leaflet-popup-content-wrapper {
+  padding: 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--blue-border);
+  background: var(--bg-card);
+}
+
+.leaflet-popup-content {
+  margin: 0 !important;
+  line-height: inherit;
+  width: 250px !important;
+}
+
+.map-popup-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.map-popup-img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+
+.map-popup-body {
+  padding: 12px;
+}
+
+.map-popup-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.map-popup-price {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--blue-primary);
+  margin-bottom: 6px;
+}
+
+.map-popup-link {
+  display: block;
+  text-align: center;
+  padding: 6px;
+  background: var(--blue-light);
+  color: var(--blue-primary);
+  font-weight: 700;
+  font-size: 0.78rem;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.map-popup-link:hover {
+  background: var(--blue-primary);
+  color: #ffffff;
+}
+
+/* Floating Map Toggle Button for Mobile */
+.floating-map-toggle {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 500;
+  background: #0f172a;
+  color: #ffffff;
+  padding: 12px 22px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: none;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  transition: all var(--transition-fast);
+}
+
+.floating-map-toggle:hover {
+  background: var(--blue-primary);
+  transform: translateX(-50%) scale(1.04);
+}
+
+@media (max-width: 900px) {
+  .floating-map-toggle {
+    display: inline-flex;
+  }
+}
+
+
+/* === INLINED css/chat.css === */
+/* ========================================================
+   TRIPTAP — IN-APP CHAT & TRUST & SAFETY STYLES
+   Permanent Chat, 5-Min Timer & 15-Min Check Window
+   ======================================================== */
+
+.chat-drawer {
+  position: fixed;
+  top: 0;
+  right: -420px;
+  width: 400px;
+  height: 100vh;
+  background: var(--bg-card);
+  border-left: 1px solid var(--border-light);
+  box-shadow: -6px 0 25px rgba(0, 0, 0, 0.15);
+  z-index: 2100;
+  display: flex;
+  flex-direction: column;
+  transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[dir="rtl"] .chat-drawer {
+  right: auto;
+  left: -420px;
+  border-left: none;
+  border-right: 1px solid var(--border-light);
+  box-shadow: 6px 0 25px rgba(0, 0, 0, 0.15);
+  transition: left 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.chat-drawer.open {
+  right: 0;
+}
+[dir="rtl"] .chat-drawer.open {
+  left: 0;
+}
+
+.chat-header {
+  padding: 16px 20px;
+  background: var(--bg-ice);
+  border-bottom: 1px solid var(--blue-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chat-partner-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chat-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--blue-primary);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.chat-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-main);
+}
+
+.chat-sub {
+  font-size: 0.75rem;
+  color: var(--text-subtle);
+}
+
+.chat-notice-banner {
+  padding: 8px 16px;
+  background: #fef3c7;
+  color: #92400e;
+  font-size: 0.72rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-bottom: 1px solid #fde68a;
+}
+
+/* Trust Timers (5-Min Confirmation & 15-Min Check) */
+.trust-timer-widget {
+  padding: 12px 16px;
+  background: var(--blue-light);
+  border-bottom: 1px solid var(--blue-border);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.timer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.timer-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--blue-primary);
+}
+
+.timer-clock {
+  font-family: monospace;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--danger);
+  background: #ffffff;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid #fecaca;
+}
+
+.timer-warning-box {
+  padding: 6px 10px;
+  background: #fffbeb;
+  border: 1px solid #fef08a;
+  border-radius: var(--radius-sm);
+  font-size: 0.72rem;
+  color: #854d0e;
+}
+
+.btn-report-problem {
+  padding: 6px 12px;
+  background: var(--danger);
+  color: #ffffff;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 0.78rem;
+  margin-top: 4px;
+  transition: all var(--transition-fast);
+}
+
+.btn-report-problem:hover {
+  background: #dc2626;
+}
+
+/* Chat Messages Stream */
+.chat-messages-container {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chat-bubble {
+  max-width: 80%;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  position: relative;
+}
+
+.chat-bubble.traveler {
+  align-self: flex-end;
+  background: var(--blue-primary);
+  color: #ffffff;
+  border-bottom-right-radius: 2px;
+}
+
+.chat-bubble.host {
+  align-self: flex-start;
+  background: var(--bg-secondary);
+  color: var(--text-main);
+  border-bottom-left-radius: 2px;
+  border: 1px solid var(--border-light);
+}
+
+.chat-bubble.system {
+  align-self: center;
+  background: var(--bg-ice);
+  color: var(--blue-primary);
+  font-size: 0.76rem;
+  font-weight: 600;
+  text-align: center;
+  border: 1px dashed var(--blue-border);
+}
+
+.chat-receipt-preview {
+  margin-top: 8px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.chat-time {
+  font-size: 0.65rem;
+  opacity: 0.7;
+  margin-top: 4px;
+  display: block;
+  text-align: right;
+}
+
+.chat-input-bar {
+  padding: 12px 16px;
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-card);
+}
+
+.chat-input-field {
+  flex: 1;
+  padding: 10px 14px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  color: var(--text-main);
+}
+
+.chat-send-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--blue-primary);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.chat-send-btn:hover {
+  background: var(--blue-hover);
+}
+
+
+/* === INLINED css/admin.css === */
+/* ========================================================
+   TRIPTAP — ADMIN HEADQUARTERS & HOST DASHBOARD STYLES
+   Permission Switcher, Phone Match Indicator, Tamper-Proof Audit
+   ======================================================== */
+
+.admin-header-strip {
+  background: linear-gradient(135deg, #0f172a, #1e3a8a);
+  color: #ffffff;
+  padding: 16px 24px;
+  border-radius: var(--radius-md);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.admin-role-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.admin-role-select {
+  background: #ffffff;
+  color: #0f172a;
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.admin-tabs-nav {
+  display: flex;
+  gap: 8px;
+  border-bottom: 2px solid var(--border-light);
+  margin-bottom: 20px;
+  overflow-x: auto;
+}
+
+.admin-tab-btn {
+  padding: 10px 18px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  border-bottom: 3px solid transparent;
+  transition: all var(--transition-fast);
+}
+
+.admin-tab-btn:hover {
+  color: var(--blue-primary);
+}
+
+.admin-tab-btn.active {
+  color: var(--blue-primary);
+  border-bottom-color: var(--blue-primary);
+}
+
+/* Phone Match Indicator Card */
+.host-app-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.host-app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.phone-match-box {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+}
+
+.phone-comparison {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.phone-label {
+  font-size: 0.72rem;
+  color: var(--text-subtle);
+  font-weight: 600;
+}
+
+.phone-num {
+  font-family: monospace;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.badge-phone-match {
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.match-success {
+  background: #dcfce7;
+  color: #15803d;
+  border: 1px solid #86efac;
+}
+
+.match-mismatch {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fca5a5;
+  animation: pulseWarning 1.5s infinite;
+}
+
+@keyframes pulseWarning {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.75; }
+}
+
+/* Tamper-Proof Audit Log Table */
+.audit-table-wrapper {
+  overflow-x: auto;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+}
+
+.audit-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  text-align: left;
+}
+
+[dir="rtl"] .audit-table {
+  text-align: right;
+}
+
+.audit-table th {
+  background: var(--bg-ice);
+  color: var(--blue-primary);
+  font-weight: 700;
+  padding: 12px 14px;
+  border-bottom: 2px solid var(--blue-border);
+}
+
+.audit-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--text-main);
+}
+
+.audit-badge-readonly {
+  display: inline-block;
+  background: #f1f5f9;
+  color: #475569;
+  font-family: monospace;
+  font-size: 0.72rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* Walk-in Host Registration */
+.walkin-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.form-input {
+  padding: 9px 12px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  background: var(--bg-secondary);
+  color: var(--text-main);
+  font-size: 0.88rem;
+}
+
+.form-input:focus {
+  border-color: var(--blue-primary);
+  background: var(--bg-card);
+}
+
+/* Host Wallet Status Cards */
+.wallet-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.wallet-card {
+  padding: 20px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+  background: var(--bg-card);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.wallet-card.warning-state {
+  border-color: #f59e0b;
+  background: #fffbeb;
+}
+
+.wallet-card.frozen-state {
+  border-color: #ef4444;
+  background: #fef2f2;
+}
+
+.wallet-amount {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--blue-primary);
+}
+
+.wallet-status-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  display: inline-block;
+  width: fit-content;
+}
+
+
+</style>
 </head>
 <body>
 
@@ -757,14 +2806,2728 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
   <!-- TripTap Application Core Modules -->
-  <script src="js/translations.js"></script>
-  <script src="js/data.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/search.js"></script>
-  <script src="js/map.js"></script>
-  <script src="js/booking.js"></script>
-  <script src="js/host.js"></script>
-  <script src="js/admin.js"></script>
-  <script src="js/chat.js"></script>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+<script>
+
+/* === INLINED js/translations.js === */
+// TripTap Multilingual Translations: English, Amharic (አማርኛ), Arabic (العربية)
+const translations = {
+  en: {
+    dir: 'ltr',
+    brand: 'TripTap',
+    tagline: "Ethiopia's Trusted Travel Marketplace",
+    nav: {
+      stays: 'Stays',
+      wheels: 'Wheels',
+      experiences: 'Experiences',
+      becomeHost: 'Become a Host',
+      hostDashboard: 'Host Mode',
+      adminPortal: 'Admin Portal',
+      chat: 'Messages',
+      saved: 'Wishlist',
+      login: 'Sign In',
+      register: 'Register',
+      logout: 'Sign Out'
+    },
+    hero: {
+      staysTitle: 'Find Your Next Stay in Ethiopia',
+      staysSub: 'Villas, boutique hotels, apartments and traditional tukuls across the country.',
+      wheelsTitle: 'Rent Reliable Wheels Anywhere',
+      wheelsSub: 'SUVs, sedans, minibuses, and professional driver-for-hire services.',
+      experiencesTitle: 'Discover Unforgettable Experiences',
+      experiencesSub: 'Coffee ceremonies, historical treks, safaris, and local culinary tours.'
+    },
+    search: {
+      where: 'Where',
+      wherePlaceholder: 'Search city or neighborhood...',
+      checkIn: 'Check-in',
+      checkOut: 'Check-out',
+      dates: 'Dates',
+      selectDates: 'Add dates',
+      guests: 'Who',
+      guestsPlaceholder: 'Add guests',
+      searchBtn: 'Search',
+      clearDates: 'Clear dates',
+      adults: 'Adults',
+      adultsAge: 'Ages 13 or above',
+      children: 'Children',
+      childrenAge: 'Ages 2–12',
+      rooms: 'Rooms / Units',
+      apply: 'Apply',
+      night: 'night',
+      nights: 'nights',
+      day: 'day',
+      person: 'person'
+    },
+    view: {
+      grid: 'Grid View',
+      split: 'Split View',
+      map: 'Map View',
+      showMap: 'Show Map',
+      showList: 'Show List',
+      filterBtn: 'Filters',
+      resultsCount: 'places found across Ethiopia'
+    },
+    filters: {
+      title: 'Filter Stays, Wheels & Experiences',
+      priceRange: 'Price Range (ETB)',
+      propertyType: 'Type',
+      amenities: 'Ethiopian Travel Essentials',
+      generator: '⚡ Backup Generator (ጀነሬተር)',
+      waterTank: '💧 Reserve Water Tank (የውሃ ታንከር)',
+      wifi: '📶 High-Speed WiFi',
+      kitchen: '🍳 Kitchen',
+      ac: '❄️ Air Conditioning',
+      security: '🛡️ 24/7 Gated Security',
+      parking: '🅿️ Free Parking',
+      bookingMethod: 'Booking Method',
+      instantBook: 'Instant Book',
+      requestToBook: 'Request to Book',
+      reset: 'Reset All',
+      applyFilters: 'Show Results'
+    },
+    listing: {
+      perNight: 'ETB / night',
+      perDay: 'ETB / day',
+      perPerson: 'ETB / person',
+      reviews: 'reviews',
+      instantBadge: 'Instant Book',
+      requestBadge: 'Request to Book',
+      verifiedHost: 'Verified Host',
+      trustScore: 'Trust Score',
+      cancellation: 'Cancellation Policy',
+      freeCancel: 'Free cancellation up to 48h before',
+      moderateCancel: '50% refund cancellation',
+      strictCancel: 'Non-refundable',
+      detailsBtn: 'View Details',
+      bookNow: 'Book with Telebirr',
+      photosCount: 'photos'
+    },
+    promotions: {
+      sponsored: 'Sponsored Business Partners',
+      tierBasic: 'Basic Sponsor (3s)',
+      tierStandard: 'Standard Sponsor (5s)',
+      tierPremium: 'Premium Sponsor (10s)'
+    },
+    bookingModal: {
+      title: 'Complete Your Telebirr Booking',
+      subtitle: 'Telebirr is the exclusive payment method on TripTap. Zero bank transfers.',
+      summary: 'Booking Summary',
+      totalAmount: 'Total Deposit (ETB)',
+      hostTelebirrNumber: 'Host Telebirr Merchant/Phone',
+      enterTxId: 'Enter Unique Telebirr Transaction ID',
+      txIdPlaceholder: 'e.g., TBL-8924103820',
+      uploadReceipt: 'Upload Telebirr Receipt Screenshot',
+      confirmBooking: 'Send Payment & Submit Booking',
+      step1: '1. Pay via Telebirr App directly to the host number shown above.',
+      step2: '2. Enter the unique Transaction ID provided by Telebirr.',
+      step3: '3. Attach screenshot of the completed Telebirr confirmation SMS/Screen.'
+    },
+    trustRules: {
+      confirmationTimerTitle: '5-Minute Host Confirmation Timer',
+      timerDesc: 'Your host has 5 minutes to verify your Telebirr screenshot and confirm.',
+      warningAt3: '⚠️ 3-Minute Alert: Host has been prompted via SMS/Push.',
+      reportAt5: 'Host did not confirm within 5 minutes. Case auto-escalated to Admin.',
+      reportProblemBtn: '🚨 Report Problem to Admin',
+      checkInTimerTitle: '15-Minute Property Check Window',
+      checkInDesc: 'You have 15 minutes after arrival to report any mismatch with photo proof.',
+      reportMismatchBtn: 'Report Property Mismatch',
+      permanentChatNote: 'All chat messages and payment receipts are permanent and monitored for security.'
+    },
+    hostWizard: {
+      btn: 'Become a Host',
+      title: 'Host Onboarding Wizard',
+      step1Title: '1. Personal & Listing Details',
+      step2Title: '2. Telebirr Security Deposit (10,000 ETB)',
+      step3Title: '3. Terms & KYC Acceptance',
+      listingName: 'Listing Title',
+      city: 'Ethiopian City',
+      category: 'Category',
+      price: 'Price in ETB',
+      photosLabel: 'Listing Photos (Min 5, Max 15)',
+      photosHelp: 'You must upload at least 5 photos to publish. (Draft mode saved otherwise)',
+      depositNotice: 'TripTap requires a 10,000 ETB security deposit deposited to TripTap Telebirr Merchant Account to activate listings.',
+      depositTxId: 'Telebirr Deposit Transaction ID',
+      depositReceipt: 'Telebirr Deposit Receipt Screenshot',
+      phoneMatchNote: 'Note: Your account phone number will be verified against your Telebirr phone number.',
+      submitApp: 'Submit Host Application',
+      next: 'Next Step',
+      prev: 'Previous Step',
+      oneListingRule: 'Notice: Version 1 enforces 1 active listing per verified host.'
+    },
+    hostDashboard: {
+      title: 'Host Control Dashboard',
+      walletBalance: 'Telebirr Wallet Balance',
+      walletNoticeOk: 'Status: Active & Live in traveler search',
+      walletWarning: '⚠️ Warning: Balance below 5,000 ETB. Please top up.',
+      walletFrozen: '🚨 FROZEN: Balance at or below 3,000 ETB. Listings automatically deactivated!',
+      topUpBtn: 'Top Up Telebirr Wallet',
+      listingStatus: 'Listing Status',
+      statusAvailable: 'Available (Active)',
+      statusBooked: 'Booked',
+      statusMaintenance: 'On Maintenance (Hidden from search)',
+      commissionNotice: 'TripTap automatically deducts 10% commission on each confirmed booking.'
+    },
+    adminPortal: {
+      title: 'TripTap Admin Headquarters',
+      roleSelector: 'Select Admin Role',
+      roles: {
+        superAdmin: 'Super Admin (Founder) — Full Access & Audit',
+        admin: 'Admin — Applications, Walk-in & Ads',
+        supportAgent: 'Support Agent — Disputes & Safety Chats',
+        financeManager: 'Finance Manager — Telebirr Wallets',
+        listingsModerator: 'Listings Moderator — Moderation'
+      },
+      tabs: {
+        applications: 'Host Applications',
+        walkIn: 'Walk-in Host Registration',
+        disputes: 'Dispute Cases',
+        audit: 'Tamper-Proof Audit Log',
+        chatMonitor: 'Safety Chat Monitor'
+      },
+      phoneMatch: 'Phone Match Indicator',
+      matched: 'MATCHED (Verified)',
+      mismatched: 'MISMATCH WARNING',
+      accountPhone: 'Account Phone',
+      telebirrPhone: 'Telebirr Phone',
+      approveBtn: 'Approve Host',
+      rejectBtn: 'Reject Host',
+      walkInTitle: 'Register In-Person Walk-in Host',
+      walkInDesc: 'Instantly registers and activates a host at the TripTap office without queue waiting.',
+      auditNote: 'Audit log is append-only and cryptographically write-only. No deletion permitted.'
+    }
+  },
+
+  am: {
+    dir: 'ltr',
+    brand: 'TripTap',
+    tagline: 'የኢትዮጵያ አስተማማኝ የጉዞና ማረፊያ ገበያ',
+    nav: {
+      stays: 'ማረፊያዎች',
+      wheels: 'ተሽከርካሪዎች',
+      experiences: 'ልምዶችና ጉብኝቶች',
+      becomeHost: 'አስተናጋጅ ይሁኑ',
+      hostDashboard: 'የአስተናጋጅ ገጽ',
+      adminPortal: 'አስተዳዳሪ ፖርታል',
+      chat: 'መልእክቶች',
+      saved: 'ተወዳጆች',
+      login: 'ግባ',
+      register: 'ተመዝገብ',
+      logout: 'ውጣ'
+    },
+    hero: {
+      staysTitle: 'በኢትዮጵያ የሚገቡበትን ምርጥ ማረፊያ ያግኙ',
+      staysSub: 'ቪላዎች፣ ሆቴሎች፣ የእንግዳ ማረፊያዎች እና ባሕላዊ ጐጆዎች በመላው ኢትዮጵያ።',
+      wheelsTitle: 'አስተማማኝ መኪናዎችን ይከራዩ',
+      wheelsSub: 'SUV፣ ሚኒባስ፣ አነስተኛ መኪናዎች እንዲሁም ሹፌር ያለው የኪራይ አገልግሎት።',
+      experiencesTitle: 'የማይረሱ የኢትዮጵያን ባህልና ጉብኝቶች ይለማመዱ',
+      experiencesSub: 'የቡና ሥነ-ስርዓት፣ የታሪካዊ ቦታዎች ጉዞ፣ ሳፋሪና ልዩ የምግብ ዝግጅቶች።'
+    },
+    search: {
+      where: 'የት ቦታ',
+      wherePlaceholder: 'ከተማ ወይም አካባቢ ፈልግ...',
+      checkIn: 'መግቢያ ቀን',
+      checkOut: 'መውጫ ቀን',
+      dates: 'ቀናት',
+      selectDates: 'ቀን ይምረጡ',
+      guests: 'እንግዶች',
+      guestsPlaceholder: 'እንግዶች ጨምር',
+      searchBtn: 'ፈልግ',
+      clearDates: 'ቀን ሰርዝ',
+      adults: 'አዋቂዎች',
+      adultsAge: 'ዕድሜ 13 እና ከዚያ በላይ',
+      children: 'ልጆች',
+      childrenAge: 'ዕድሜ 2–12',
+      rooms: 'ክፍሎች',
+      apply: 'ተግብር',
+      night: 'ሌሊት',
+      nights: 'ሌሊቶች',
+      day: 'ቀን',
+      person: 'ሰው'
+    },
+    view: {
+      grid: 'የዝርዝር እይታ',
+      split: 'የተከፈለ እይታ',
+      map: 'የካርታ እይታ',
+      showMap: 'ካርታ አሳይ',
+      showList: 'ዝርዝር አሳይ',
+      filterBtn: 'ማጣሪያዎች',
+      resultsCount: 'የተገኙ ቦታዎች በኢትዮጵያ'
+    },
+    filters: {
+      title: 'ማረፊያዎችን፣ መኪናዎችን እና ጉብኝቶችን ያጣሩ',
+      priceRange: 'የዋጋ መጠን (በብር)',
+      propertyType: 'ዓይነት',
+      amenities: 'አስፈላጊ የኢትዮጵያ መገልገያዎች',
+      generator: '⚡ አስተማማኝ ጀነሬተር',
+      waterTank: '💧 የውሃ ታንከር / ማጠራቀሚያ',
+      wifi: '📶 ፈጣን ዋይፋይ (WiFi)',
+      kitchen: '🍳 ማብሰያ ቤት',
+      ac: '❄️ አየር ማቀዝቀዣ (AC)',
+      security: '🛡️ የ24 ሰዓት ጥበቃ',
+      parking: '🅿️ ነፃ የመኪና ማቆሚያ',
+      bookingMethod: 'የቦታ ማስያዣ ዘዴ',
+      instantBadge: 'ወዲያውኑ ያስይዙ',
+      requestBadge: 'ጠይቀው ያስይዙ',
+      reset: 'ሁሉንም አጽዳ',
+      applyFilters: 'ውጤቶችን አሳይ'
+    },
+    listing: {
+      perNight: 'ብር / በሌሊት',
+      perDay: 'ብር / በቀን',
+      perPerson: 'ብር / በሰው',
+      reviews: 'ግምገማዎች',
+      instantBadge: 'ቀጥታ የሚያዝ',
+      requestBadge: 'በጥያቄ የሚያዝ',
+      verifiedHost: 'የተረጋገጠ አስተናጋጅ',
+      trustScore: 'የታማኝነት ነጥብ',
+      cancellation: 'የስረዛ ፖሊሲ',
+      freeCancel: 'እስከ 48 ሰዓት በፊት ነፃ ስረዛ',
+      moderateCancel: '50% ተመላሽ ስረዛ',
+      strictCancel: 'ተመላሽ የሌለው',
+      detailsBtn: 'ዝርዝሩን እይ',
+      bookNow: 'በቴሌብር ያስይዙ',
+      photosCount: 'ፎቶዎች'
+    },
+    promotions: {
+      sponsored: 'ስፖንሰር የተደረጉ የንግድ ድርጅቶች',
+      tierBasic: 'መሰረታዊ ስፖንሰር (3 ሰከንድ)',
+      tierStandard: 'መደበኛ ስፖንሰር (5 ሰከንድ)',
+      tierPremium: 'ፕሪሚየም ስፖንሰር (10 ሰከንድ)'
+    },
+    bookingModal: {
+      title: 'በቴሌብር ቦታ ማስያዝዎን ያጠናቅቁ',
+      subtitle: 'በTripTap ላይ ክፍያ በቴሌብር ብቻ ነው የሚፈጸመው። የባንክ ቁጥር አያስፈልግም።',
+      summary: 'የቦታ ማስያዣ ማጠቃለያ',
+      totalAmount: 'ጠቅላላ የቅድመ ክፍያ (ብር)',
+      hostTelebirrNumber: 'የአስተናጋጁ የቴሌብር ቁጥር',
+      enterTxId: 'ልዩ የቴሌብር የግብይት ቁጥር (Transaction ID)',
+      txIdPlaceholder: 'ምሳሌ፦ TBL-8924103820',
+      uploadReceipt: 'የቴሌብር ደረሰኝ ፎቶ ይጫኑ',
+      confirmBooking: 'ክፍያውን ላክና ቦታውን አረጋግጥ',
+      step1: '1. ከላይ ወዳለው የአስተናጋጅ ቴሌብር ቁጥር በቀጥታ ይክፈሉ።',
+      step2: '2. በቴሌብር መልእክት የተላከሎትን የግብይት መለያ ቁጥር ያስገቡ።',
+      step3: '3. የክፍያ ማረጋገጫውን ስክሪንሽት ፎቶ አያይዘው ይላኩ።'
+    },
+    trustRules: {
+      confirmationTimerTitle: 'የ5-ደቂቃ ማረጋገጫ ቆጣሪ',
+      timerDesc: 'አስተናጋጁ የቴሌብር ደረሰኙን አይቶ በ5 ደቂቃ ውስጥ ማረጋገጥ አለበት።',
+      warningAt3: '⚠️ የ3-ደቂቃ ማስጠንቀቂያ፦ ለአስተናጋጁ ማስታወሻ ተልኳል።',
+      reportAt5: 'አስተናጋጁ በ5 ደቂቃ ውስጥ አላረጋገጠም። ጉዳዩ ወደ አስተዳዳሪ ተመርቷል።',
+      reportProblemBtn: '🚨 ችግር ለአስተዳዳሪ አሳውቅ',
+      checkInTimerTitle: 'የ15-ደቂቃ የንብረት ማረጋገጫ መስኮት',
+      checkInDesc: 'እንደደረሱ በ15 ደቂቃ ውስጥ የተገለጸው ቦታ ካልተሟላ በፎቶ ማስረጃ ሪፖርት ማድረግ ይችላሉ።',
+      reportMismatchBtn: 'የቦታ አለመመሳሰልን ሪፖርት አድርግ',
+      permanentChatNote: 'ሁሉም መልእክቶችና ደረሰኞች ለደህንነት ሲባል በቋሚነት ይመዘገባሉ።'
+    },
+    hostWizard: {
+      btn: 'አስተናጋጅ ይሁኑ',
+      title: 'የአስተናጋጅ ምዝገባ ቅጽ',
+      step1Title: '1. የግልና የማረፊያው ዝርዝር መረጃ',
+      step2Title: '2. የቴሌብር ዋስትና ተቀማጭ (10,000 ብር)',
+      step3Title: '3. ውሎችና የማንነት ማረጋገጫ (KYC)',
+      listingName: 'የማረፊያው ወይም ተሽከርካሪው ስም',
+      city: 'የኢትዮጵያ ከተማ',
+      category: 'ምድብ',
+      price: 'ዋጋ በብር',
+      photosLabel: 'ፎቶዎች (ቢያንስ 5፣ ቢበዛ 15 ፎቶዎች)',
+      photosHelp: 'ለማስተላለፍ ቢያንስ 5 ፎቶዎች መጫን ግዴታ ነው።',
+      depositNotice: 'TripTap አካውንትን ለማስጀመር 10,000 ብር ዋስትና በቴሌብር ይደረጋል።',
+      depositTxId: 'የቴሌብር ተቀማጭ ግብይት ቁጥር',
+      depositReceipt: 'የቴሌብር ደረሰኝ ፎቶ',
+      phoneMatchNote: 'ማስታወሻ፦ የመመዝገቢያ ስልክዎ ከቴሌብር ስልክዎ ጋር ይነጻጸራል።',
+      submitApp: 'የአስተናጋጅ ማመልከቻ አስገባ',
+      next: 'ቀጣይ',
+      prev: 'ተመለስ',
+      oneListingRule: 'ማስታወሻ፦ በአንድ አስተናጋጅ 1 ንቁ ማረፊያ ብቻ ይፈቀዳል።'
+    },
+    hostDashboard: {
+      title: 'የአስተናጋጅ መቆጣጠሪያ ገጽ',
+      walletBalance: 'የቴሌብር ሂሳብ መጠን',
+      walletNoticeOk: 'ሁኔታ፦ ንቁ እና በፍለጋ ላይ የሚታይ',
+      walletWarning: '⚠️ ማስጠንቀቂያ፦ ሂሳብዎ ከ5,000 ብር በታች ዝቅ ብሏል። እባክዎ ይሙሉ!',
+      walletFrozen: '🚨 ታግዷል፦ ሂሳብዎ 3,000 ብር ወይም ከዚያ በታች ስለሆነ ማረፊያዎ ተደብቋል!',
+      topUpBtn: 'በቴሌብር ገንዘብ ሙላ',
+      listingStatus: 'የማረፊያው ሁኔታ',
+      statusAvailable: 'ክፍት (Available)',
+      statusBooked: 'የተያዘ (Booked)',
+      statusMaintenance: 'በጥገና ላይ (የተደበቀ)',
+      commissionNotice: 'በእያንዳንዱ የተረጋገጠ ቦታ ማስያዝ 10% ኮሚሽን ከዋሌት ይቀነሳል።'
+    },
+    adminPortal: {
+      title: 'የTripTap አስተዳደር ማዕከል',
+      roleSelector: 'የአስተዳዳሪ ደረጃ ምረጥ',
+      roles: {
+        superAdmin: 'ዋና አስተዳዳሪ (Super Admin - መስራች)',
+        admin: 'አስተዳዳሪ (Admin)',
+        supportAgent: 'የደንበኞች ድጋፍ (Support Agent)',
+        financeManager: 'የፋይናንስ ኃላፊ (Finance Manager)',
+        listingsModerator: 'የዝርዝር ተቆጣጣሪ (Listings Moderator)'
+      },
+      tabs: {
+        applications: 'የአስተናጋጅ ማመልከቻዎች',
+        walkIn: 'በአካል የመጡ አስተናጋጆች ምዝገባ',
+        disputes: 'አለመግባባቶች',
+        audit: 'የማይቀየር የኦዲት መዝገብ',
+        chatMonitor: 'የመልእክት ክትትል'
+      },
+      phoneMatch: 'የስልክ ቁጥር ማረጋገጫ',
+      matched: 'ይዛመዳል (ትክክል)',
+      mismatched: 'አይዛመድም (ማስጠንቀቂያ)',
+      accountPhone: 'የመለያ ስልክ',
+      telebirrPhone: 'የቴሌብር ስልክ',
+      approveBtn: 'አጽድቅ',
+      rejectBtn: 'ውድቅ አድርግ',
+      walkInTitle: 'በቢሮ በአካል የመጣ አስተናጋጅ ምዝገባ',
+      walkInDesc: 'በቀጥታ በTripTap ቢሮ ተገኝቶ የተመዘገበ አስተናጋጅ ፈጣን ማረጋገጫ።',
+      auditNote: 'የኦዲት መዝገብ ሊሰረዝ ወይም ሊቀየር አይችልም። ቋሚ ነው።'
+    }
+  },
+
+  ar: {
+    dir: 'rtl',
+    brand: 'TripTap',
+    tagline: 'سوق السفر والإقامة الموثوق في إثيوبيا',
+    nav: {
+      stays: 'الإقامات',
+      wheels: 'المركبات',
+      experiences: 'التجارب السياحية',
+      becomeHost: 'كن مضيفاً',
+      hostDashboard: 'لوحة المضيف',
+      adminPortal: 'بوابة الإدارة',
+      chat: 'الرسائل',
+      saved: 'المفضلة',
+      login: 'تسجيل الدخول',
+      register: 'إنشاء حساب',
+      logout: 'تسجيل الخروج'
+    },
+    hero: {
+      staysTitle: 'اعثر على إقامتك المثالية في إثيوبيا',
+      staysSub: 'فلل، فنادق راقية، شقق مفروشة، وأكواخ تقليدية عبر مدن إثيوبيا.',
+      wheelsTitle: 'استأجر سيارات مضمونة في كل مكان',
+      wheelsSub: 'سيارات دفع رباعي SUV، حافلات سياحية، وسيارات مع سائق خاص.',
+      experiencesTitle: 'اكتشف تجارب ثقافية وسياحية لا تُنسى',
+      experiencesSub: 'مراسم القهوة الإثيوبية، جولات الجبال التاريخية، رحلات السفاري وتذوق الأطعمة.'
+    },
+    search: {
+      where: 'الوجهة',
+      wherePlaceholder: 'ابحث عن مدينة أو حي...',
+      checkIn: 'تاريخ الوصول',
+      checkOut: 'تاريخ المغادرة',
+      dates: 'التواريخ',
+      selectDates: 'اختر التاريخ',
+      guests: 'الضيوف',
+      guestsPlaceholder: 'أضف الضيوف',
+      searchBtn: 'بحث',
+      clearDates: 'مسح التواريخ',
+      adults: 'البالغون',
+      adultsAge: 'العمر 13 عاماً فأكثر',
+      children: 'الأطفال',
+      childrenAge: 'العمر 2–12 عاماً',
+      rooms: 'الغرف',
+      apply: 'تطبيق',
+      night: 'ليلة',
+      nights: 'ليالٍ',
+      day: 'يوم',
+      person: 'شخص'
+    },
+    view: {
+      grid: 'عرض الشبكة',
+      split: 'عرض مقسم',
+      map: 'عرض الخريطة',
+      showMap: 'إظهار الخريطة',
+      showList: 'إظهار القائمة',
+      filterBtn: 'تصفية النتائج',
+      resultsCount: 'أماكن متوفرة في إثيوبيا'
+    },
+    filters: {
+      title: 'تصفية الإقامات والمركبات والتجارب',
+      priceRange: 'نطاق السعر (بالبر الإثيوبي ETB)',
+      propertyType: 'النوع',
+      amenities: 'المرافق الأساسية في إثيوبيا',
+      generator: '⚡ مولد كهرباء احتياطي',
+      waterTank: '💧 خزان مياه احتياطي',
+      wifi: '📶 إنترنت واي فاي عالي السرعة',
+      kitchen: '🍳 مطبخ مجهز',
+      ac: '❄️ تكييف هواء',
+      security: '🛡️ حراسة أمنية على مدار 24 ساعة',
+      parking: '🅿️ موقف سيارات مجاني',
+      bookingMethod: 'طريقة الحجز',
+      instantBadge: 'حجز فوري',
+      requestBadge: 'طلب حجز مسبق',
+      reset: 'إعادة الضبط',
+      applyFilters: 'عرض النتائج'
+    },
+    listing: {
+      perNight: 'بر / ليلة',
+      perDay: 'بر / يوم',
+      perPerson: 'بر / شخص',
+      reviews: 'تقييمات',
+      instantBadge: 'حجز فوري',
+      requestBadge: 'طلب حجز',
+      verifiedHost: 'مضيف موثق',
+      trustScore: 'درجة الموثوقية',
+      cancellation: 'سياسة الإلغاء',
+      freeCancel: 'إلغاء مجاني حتى 48 ساعة قبل الموعد',
+      moderateCancel: 'استرداد 50% عند الإلغاء',
+      strictCancel: 'غير قابل للاسترداد',
+      detailsBtn: 'عرض التفاصيل',
+      bookNow: 'احجز عبر تيليبير (Telebirr)',
+      photosCount: 'صور'
+    },
+    promotions: {
+      sponsored: 'شركاء الأعمال والإعلانات المعتمدة',
+      tierBasic: 'شريك أساسي (3 ثوانٍ)',
+      tierStandard: 'شريك قياسي (5 ثوانٍ)',
+      tierPremium: 'شريك مميز (10 ثوانٍ)'
+    },
+    bookingModal: {
+      title: 'إتمام الحجز عبر تيليبير (Telebirr)',
+      subtitle: 'تيليبير هي وسيلة الدفع الحصرية على المنصة. لا توجد تحويلات بنكية.',
+      summary: 'ملخص الحجز',
+      totalAmount: 'إجمالي العربون (بر إثيوبي)',
+      hostTelebirrNumber: 'رقم حساب تيليبير للمضيف',
+      enterTxId: 'أدخل رقم المعاملة الفريد (Transaction ID)',
+      txIdPlaceholder: 'مثال: TBL-8924103820',
+      uploadReceipt: 'ارفع لقطة شاشة إيصال التحويل',
+      confirmBooking: 'إرسال الإيصال وتأكيد الحجز',
+      step1: '1. ادفع عبر تطبيق Telebirr مباشرة إلى رقم المضيف الموضح أعلاه.',
+      step2: '2. أدخل رقم العملية الفريد المستلم في رسالة التأكيد.',
+      step3: '3. أرفق لقطة الشاشة الواضحة لإيصال الدفع.'
+    },
+    trustRules: {
+      confirmationTimerTitle: 'مؤقت تأكيد المضيف (5 دقائق)',
+      timerDesc: 'لدى المضيف 5 دقائق لمراجعة إيصال تيليبير وتأكيد الحجز.',
+      warningAt3: '⚠️ تنبيه الدقيقة 3: تم إرسال إشعار تذكير للمضيف.',
+      reportAt5: 'لم يؤكد المضيف خلال 5 دقائق. تم تصعيد الحالة تلقائياً للإدارة.',
+      reportProblemBtn: '🚨 إبلاغ الإدارة عن مشكلة',
+      checkInTimerTitle: 'مهلة فحص العقار (15 دقيقة بعد الوصول)',
+      checkInDesc: 'لديك 15 دقيقة بعد الوصول للإبلاغ عن أي عدم تطابق مع إرفاق صور إثبات.',
+      reportMismatchBtn: 'الإبلاغ عن عدم تطابق العقار',
+      permanentChatNote: 'جميع المحادثات وإيصالات الدفع مسجلة بشكل دائم لأغراض الأمان.'
+    },
+    hostWizard: {
+      btn: 'كن مضيفاً',
+      title: 'معالج تسجيل المضيف الجديد',
+      step1Title: '1. بيانات المضيف والعقار',
+      step2Title: '2. وديعة التأمين عبر تيليبير (10,000 بر)',
+      step3Title: '3. الشروط والتحقق من الهوية (KYC)',
+      listingName: 'عنوان الإعلان أو العقار',
+      city: 'المدينة الإثيوبية',
+      category: 'الفئة',
+      price: 'السعر بالبر الإثيوبي',
+      photosLabel: 'صور الإعلان (من 5 إلى 15 صورة كحد أقصى)',
+      photosHelp: 'يجب رفع 5 صور على الأقل لتفعيل زر النشر.',
+      depositNotice: 'يتطلب تفعيل الحساب إيداع 10,000 بر كتأمين في حساب المنصة عبر Telebirr.',
+      depositTxId: 'رقم معاملة إيداع التأمين',
+      depositReceipt: 'صورة إيصال إيداع الوديعة',
+      phoneMatchNote: 'ملاحظة: سيتم مطابقة رقم هاتف الحساب مع رقم هاتف تيليبير من قِبل الإدارة.',
+      submitApp: 'إرسال طلب الانضمام كمضيف',
+      next: 'التالي',
+      prev: 'السابق',
+      oneListingRule: 'تنبيه: يسمح بإعلان نشط واحد فقط لكل مضيف في الإصدار الأول.'
+    },
+    hostDashboard: {
+      title: 'لوحة تحكم المضيف',
+      walletBalance: 'رصيد محفظة تيليبير',
+      walletNoticeOk: 'الحالة: نشط وظاهر في نتائج البحث',
+      walletWarning: '⚠️ تحذير: الرصيد انخفض عن 5,000 بر. يرجى الشحن قريباً.',
+      walletFrozen: '🚨 مجمد: الرصيد 3,000 بر أو أقل. تم إخفاء إعلانك تلقائياً!',
+      topUpBtn: 'شحن المحفظة عبر تيليبير',
+      listingStatus: 'حالة الإعلان',
+      statusAvailable: 'متاح للجميع (Available)',
+      statusBooked: 'محجوز (Booked)',
+      statusMaintenance: 'تحت الصيانة (مخفي من البحث)',
+      commissionNotice: 'تخصم TripTap عمولة بنسبة 10% تلقائياً عند كل حجز مؤكد.'
+    },
+    adminPortal: {
+      title: 'مركز إدارة TripTap المركزي',
+      roleSelector: 'تحديد دور الإدارة',
+      roles: {
+        superAdmin: 'المسؤول العام (المؤسس Super Admin) — صلاحيات كاملة',
+        admin: 'مدير العمليات (Admin) — الطلبات والإعلانات',
+        supportAgent: 'وكيل الدعم (Support Agent) — النزاعات والمحادثات',
+        financeManager: 'المدير المالي (Finance Manager) — المحافظ والعمولات',
+        listingsModerator: 'مشرف الإعلانات (Listings Moderator) — التدقيق'
+      },
+      tabs: {
+        applications: 'طلبات المضيفين',
+        walkIn: 'تسجيل الحضور الشخصي في المكتب',
+        disputes: 'النزاعات والشكاوى',
+        audit: 'سجل التدقيق غير القابل للتعديل',
+        chatMonitor: 'مراقبة المحادثات'
+      },
+      phoneMatch: 'مؤشر مطابقة رقم الهاتف',
+      matched: 'متطابق (معتمد)',
+      mismatched: 'تحذير عدم تطابق',
+      accountPhone: 'هاتف الحساب',
+      telebirrPhone: 'هاتف تيليبير',
+      approveBtn: 'موافقة وتفعيل',
+      rejectBtn: 'رفض الطلب',
+      walkInTitle: 'تسجيل مضيف بالحضور الشخصي لمكتب أديس أبابا',
+      walkInDesc: 'تفعيل فوري للمضيفين القادمين لمكتب TripTap مباشرة وتجاوز طابور الانتظار.',
+      auditNote: 'سجل التدقيق محمي ولا يقبل الحذف أو التعديل نهائياً.'
+    }
+  }
+};
+
+window.translations = translations;
+
+
+/* === INLINED js/data.js === */
+// TripTap Data: Cities, Listings (Stays, Wheels, Experiences), and Business Ads
+
+const ethiopianCities = [
+  { id: 'all', nameEn: 'All Ethiopia', nameAm: 'መላው ኢትዮጵያ', nameAr: 'كل إثيوبيا', count: 24 },
+  { id: 'addis', nameEn: 'Addis Ababa', nameAm: 'አዲስ አበባ', nameAr: 'أديس أبابا', count: 10, lat: 9.02497, lng: 38.74689 },
+  { id: 'bahirdar', nameEn: 'Bahir Dar', nameAm: 'ባህር ዳር', nameAr: 'بحر دار', count: 4, lat: 11.59364, lng: 37.39077 },
+  { id: 'hawassa', nameEn: 'Hawassa', nameAm: 'ሀዋሳ', nameAr: 'هواسا', count: 3, lat: 7.06205, lng: 38.47631 },
+  { id: 'lalibela', nameEn: 'Lalibela', nameAm: 'ላሊበላ', nameAr: 'لاليبيلا', count: 3, lat: 12.03219, lng: 39.04756 },
+  { id: 'gondar', nameEn: 'Gondar', nameAm: 'ጎንደር', nameAr: 'غوندار', count: 2, lat: 12.60751, lng: 37.46672 },
+  { id: 'bishoftu', nameEn: 'Bishoftu', nameAm: 'ቢሾፍቱ', nameAr: 'بيشوفتو', count: 2, lat: 8.75225, lng: 38.97846 }
+];
+
+const sponsoredAds = [
+  {
+    id: 'ad-1',
+    businessName: 'Kuriftu Resort & Spa Bishoftu',
+    badge: 'Premium Partner',
+    tier: 'premium',
+    duration: 10000,
+    taglineEn: 'Luxury Lakeside Retreats — Exclusive 15% discount when booked via Telebirr on TripTap',
+    taglineAm: 'የቅንጦት የሀይቅ ዳር እረፍት — በTripTap በቴሌብር ሲያስይዙ የ15% ቅናሽ',
+    taglineAr: 'منتجع كورفتو الفاخر بيشوفتو — خصم حصري 15% عند الحجز عبر تيليبير على تريب تﺎب',
+    image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80',
+    link: '#stays',
+    ctaEn: 'Explore Stays',
+    ctaAm: 'ማረፊያዎችን እይ',
+    ctaAr: 'استكشف الإقامات'
+  },
+  {
+    id: 'ad-2',
+    businessName: 'Ethio Express 4x4 Car Rentals',
+    badge: 'Standard Partner',
+    tier: 'standard',
+    duration: 5000,
+    taglineEn: 'Rugged Land Cruisers with licensed English & Amharic speaking drivers for Omo Valley & Highlands',
+    taglineAm: 'አስተማማኝ ቶዮታ ላንድ ክሩዘር ከመንጃ ፍቃድ ካላቸው ልምድኛ ሹፌሮች ጋር',
+    taglineAr: 'تأجير سيارات الدفع الرباعي 4x4 مع سائقين محترفين لجولات الوادي والرحلات الجبلية',
+    image: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1200&q=80',
+    link: '#wheels',
+    ctaEn: 'Rent Wheels',
+    ctaAm: 'ተሽከርካሪዎችን እይ',
+    ctaAr: 'استئجر سيارة'
+  },
+  {
+    id: 'ad-3',
+    businessName: 'Tomoca Heritage Coffee Ceremonies',
+    badge: 'Basic Partner',
+    tier: 'basic',
+    duration: 3000,
+    taglineEn: 'Authentic Ethiopian clay pot jebena coffee brewing and cultural roasting workshops',
+    taglineAm: 'ባህላዊ የሸክላ ጀበና የኢትዮጵያ ቡና አፈላል እና የባህል ዝግጅት',
+    taglineAr: 'جلسات تحضير القهوة الإثيوبية التقليدية العريقة بالجَبَنَة وورش التحميص التراثية',
+    image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=1200&q=80',
+    link: '#experiences',
+    ctaEn: 'Book Experience',
+    ctaAm: 'ልምዱን ያስይዙ',
+    ctaAr: 'احجز التجربة'
+  }
+];
+
+const listingsData = [
+  // ================= STAYS =================
+  {
+    id: 'stay-1',
+    category: 'stays',
+    subType: 'Villa',
+    subTypeAm: 'ቪላ',
+    subTypeAr: 'فيلا فاخرة',
+    titleEn: 'Bole Atlas Luxury Executive Villa with Private Garden',
+    titleAm: 'ቦሌ አትላስ የቅንጦት ኤክስኪዩቲቭ ቪላ ከግል የአትክልት ስፍራ ጋር',
+    titleAr: 'فيلا رجال الأعمال الفاخرة في بولي أطلس مع حديقة خاصة',
+    cityId: 'addis',
+    cityNameEn: 'Bole, Addis Ababa',
+    cityNameAm: 'ቦሌ አትላስ፣ አዲስ አበባ',
+    cityNameAr: 'بولي أطلس، أديس أبابا',
+    lat: 8.9953,
+    lng: 38.7842,
+    priceETB: 8500,
+    priceUnit: 'night',
+    rating: 4.95,
+    reviewsCount: 38,
+    instantBook: true,
+    verifiedHost: true,
+    trustScore: '99%',
+    hostName: 'Dawit Mengistu',
+    hostPhone: '+251 91 123 4567',
+    hostTelebirr: '+251 91 123 4567',
+    status: 'Available', // Available, Booked, On Maintenance
+    cancellation: 'freeCancel',
+    guestsMax: 6,
+    bedrooms: 3,
+    bathrooms: 3.5,
+    amenities: ['generator', 'waterTank', 'wifi', 'kitchen', 'security', 'parking', 'ac'],
+    images: [
+      'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=800&q=80'
+    ],
+    descriptionEn: 'Gated 3-bedroom sanctuary in Bole Atlas with 24/7 solar backup generator, automatic 5,000L water reserve, fiber optic 100Mbps WiFi, chef kitchen, and private terrace.',
+    descriptionAm: 'በቦሌ አትላስ የሚገኝ ባለ 3 መኝታ ቤት ቪላ፣ 24/7 የፀሐይና ጀነሬተር ኤሌክትሪክ፣ የ5,000 ሊትር ውሃ ማጠራቀሚያ፣ ፈጣን ዋይፋይ እና የጥበቃ አገልግሎት ያለው።',
+    descriptionAr: 'فيلا راقية من 3 غرف نوم في بولي أطلس مزودة بمولد كهربائي يعمل 24/7 وخزان مياه 5000 لتر وإنترنت ألياف ضوئية سريع وحراسة أمنية مشددة.'
+  },
+  {
+    id: 'stay-2',
+    category: 'stays',
+    subType: 'Apartment',
+    subTypeAm: 'አፓርታማ',
+    subTypeAr: 'شقة فندقية',
+    titleEn: 'Kazanchis Skyline Modern Condo near UNECA',
+    titleAm: 'ካዛንቺስ ዘመናዊ ኮንዶ አፓርታማ ከተባበሩት መንግስታት ድርጅት (UNECA) አቅራቢያ',
+    titleAr: 'شقة كازانتشيس العصرية المطلة على المدينة قرب مقر الأمم المتحدة',
+    cityId: 'addis',
+    cityNameEn: 'Kazanchis, Addis Ababa',
+    cityNameAm: 'ካዛንቺስ፣ አዲስ አበባ',
+    cityNameAr: 'كازانتشيس، أديس أبابا',
+    lat: 9.0185,
+    lng: 38.7695,
+    priceETB: 4200,
+    priceUnit: 'night',
+    rating: 4.88,
+    reviewsCount: 52,
+    instantBook: true,
+    verifiedHost: true,
+    trustScore: '98%',
+    hostName: 'Selamawit Tadesse',
+    hostPhone: '+251 92 234 5678',
+    hostTelebirr: '+251 92 234 5678',
+    status: 'Available',
+    cancellation: 'freeCancel',
+    guestsMax: 3,
+    bedrooms: 1,
+    bathrooms: 1,
+    amenities: ['generator', 'waterTank', 'wifi', 'kitchen', 'security', 'ac'],
+    images: [
+      'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=800&q=80'
+    ],
+    descriptionEn: 'High-floor sunlit flat with breathtaking views of the capital, uninterrupted power generator, water backup, and walking distance to UNECA and luxury dining.',
+    descriptionAm: 'በካዛንቺስ የሚገኝ ውብ አፓርታማ፣ ጀነሬተርና የውሃ ታንከር ያለው፣ ለንግድና ለዲፕሎማሲ ስራዎች ምቹ።',
+    descriptionAr: 'شقة فاخرة بإطلالة بانورامية رائعة في كازانتشيس، مزودة بمولد كهربائي ومياه مستمرة وإنترنت سريع على بعد خطوات من مقر UNECA.'
+  },
+  {
+    id: 'stay-3',
+    category: 'stays',
+    subType: 'Guest House',
+    subTypeAm: 'የእንግዳ ማረፊያ',
+    subTypeAr: 'بيت ضيافة بحيرة تانا',
+    titleEn: 'Lake Tana Shoreline Eco-Lodge & Guest House',
+    titleAm: 'የጣና ሐይቅ ዳርቻ ኢኮ-ሎጅ እና የእንግዳ ማረፊያ',
+    titleAr: 'نزل إيكولوجي على ضفاف بحيرة تانا في بحر دار',
+    cityId: 'bahirdar',
+    cityNameEn: 'Lake Tana, Bahir Dar',
+    cityNameAm: 'ጣና ሐይቅ፣ ባህር ዳር',
+    cityNameAr: 'بحيرة تانا، بحر دار',
+    lat: 11.598,
+    lng: 37.382,
+    priceETB: 3400,
+    priceUnit: 'night',
+    rating: 4.92,
+    reviewsCount: 44,
+    instantBook: false,
+    verifiedHost: true,
+    trustScore: '97%',
+    hostName: 'Hailemariam Assefa',
+    hostPhone: '+251 93 345 6789',
+    hostTelebirr: '+251 93 345 6789',
+    status: 'Available',
+    cancellation: 'moderateCancel',
+    guestsMax: 4,
+    bedrooms: 2,
+    bathrooms: 2,
+    amenities: ['generator', 'waterTank', 'wifi', 'parking', 'security'],
+    images: [
+      'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80'
+    ],
+    descriptionEn: 'Serene stone-and-timber waterfront lodge with private boat dock for monastery tours, fresh Nile perch dining, backup generator, and tropical garden.',
+    descriptionAm: 'በባህር ዳር የጣና ሐይቅ ዳርቻ የሚገኝ ሰላማዊ የእንግዳ ማረፊያ፣ የጀልባ ጉዞ እና የባህል ምግብ አገልግሎት ያለው።',
+    descriptionAr: 'نزل هادئ على ضفاف بحيرة تانا مع مرسى قوارب خاص لزيارة الأديرة التاريخية، وحديقة غناء ومولد كهرباء احتياطي.'
+  },
+  {
+    id: 'stay-4',
+    category: 'stays',
+    subType: 'Boutique Hotel',
+    subTypeAm: 'ቦቲክ ሆቴል',
+    subTypeAr: 'فندق تراثي لاليبيلا',
+    titleEn: 'Lalibela Mountain View Heritage Suites',
+    titleAm: 'የላሊበላ ተራራ እይታ ቅርስ ስዊትስ ሆቴል',
+    titleAr: 'أجنحة إطلالة الجبل التراثية في لاليبيلا',
+    cityId: 'lalibela',
+    cityNameEn: 'Historic Lalibela',
+    cityNameAm: 'ታሪካዊ ላሊበላ',
+    cityNameAr: 'لاليبيلا التاريخية',
+    lat: 12.035,
+    lng: 39.043,
+    priceETB: 3900,
+    priceUnit: 'night',
+    rating: 4.97,
+    reviewsCount: 67,
+    instantBook: true,
+    verifiedHost: true,
+    trustScore: '100%',
+    hostName: 'Kassahun Bekele',
+    hostPhone: '+251 94 456 7890',
+    hostTelebirr: '+251 94 456 7890',
+    status: 'Available',
+    cancellation: 'freeCancel',
+    guestsMax: 2,
+    bedrooms: 1,
+    bathrooms: 1,
+    amenities: ['generator', 'waterTank', 'wifi', 'security', 'ac'],
+    images: [
+      'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=800&q=80'
+    ],
+    descriptionEn: 'Perched overlooking the Lasta mountains, 8 minutes walk to the 11 rock-hewn UNESCO churches. Includes traditional breakfast, solar backup, and heated showers.',
+    descriptionAm: 'ከውብ የላስታ ተራሮች ፊት ለፊት ከውቅር አብያተ ክርስቲያናት ጥቂት ደቂቃዎች ርቀት ላይ የሚገኝ ምርጥ ሆቴል።',
+    descriptionAr: 'أجنحة مطلة على جبال لاستا الشاهقة، على بُعد دقائق من كنائس لاليبيلا الصخرية الشهيرة، مع إفطار إثيوبي تقليدي وطاقة شمسية.'
+  },
+  {
+    id: 'stay-5',
+    category: 'stays',
+    subType: 'Villa',
+    subTypeAm: 'ቪላ',
+    subTypeAr: 'فيلا بحيرة هواسا',
+    titleEn: 'Hawassa Lakeside Sunset Villa with Pool',
+    titleAm: 'የሀዋሳ ሐይቅ ፀሐይ መግቢያ ቪላ ከመዋኛ ገንዳ ጋር',
+    titleAr: 'فيلا غروب الشمس على ضفاف بحيرة هواسا مع مسبح خاص',
+    cityId: 'hawassa',
+    cityNameEn: 'Lake Hawassa Promenade',
+    cityNameAm: 'የሀዋሳ ሐይቅ ዳርቻ',
+    cityNameAr: 'كورنيش بحيرة هواسا',
+    lat: 7.058,
+    lng: 38.472,
+    priceETB: 6800,
+    priceUnit: 'night',
+    rating: 4.91,
+    reviewsCount: 29,
+    instantBook: true,
+    verifiedHost: true,
+    trustScore: '99%',
+    hostName: 'Almaz Wolde',
+    hostPhone: '+251 95 567 8901',
+    hostTelebirr: '+251 95 567 8901',
+    status: 'Available',
+    cancellation: 'freeCancel',
+    guestsMax: 8,
+    bedrooms: 4,
+    bathrooms: 4,
+    amenities: ['generator', 'waterTank', 'wifi', 'kitchen', 'security', 'parking', 'ac'],
+    images: [
+      'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1613977257592-4871e5fcd7c4?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1600585152220-90363fe7e115?auto=format&fit=crop&w=800&q=80'
+    ],
+    descriptionEn: 'Sprawling lakeside private villa with manicured lawn, infinity plunge pool, water tanks, automatic diesel generator, and view of Mount Tabor.',
+    descriptionAm: 'በሀዋሳ ሐይቅ ዳር የሚገኝ ሰፊ ቪላ ከመዋኛ ገንዳ እና ጀነሬተር ጋር፣ ለቤተሰብ እረፍት ፍጹም።',
+    descriptionAr: 'فيلا فخمة على شاطئ بحيرة هواسا تضم مسبحاً خاصاً وحديقة شاسعة ومولد كهربائي ديزل وخزانات مياه احتياطية.'
+  },
+
+  // ================= WHEELS =================
+  {
+    id: 'wheel-1',
+    category: 'wheels',
+    subType: 'SUV 4x4',
+    subTypeAm: 'SUV 4x4',
+    subTypeAr: 'سيارة دفع رباعي SUV',
+    titleEn: 'Toyota Land Cruiser V8 Prado 4x4 with Chauffeur',
+    titleAm: 'ቶዮታ ላንድ ክሩዘር ፕራዶ 4x4 ከሹፌር ጋር',
+    titleAr: 'تويوتا لاند كروزر برادو 4x4 مع سائق محترف',
+    cityId: 'addis',
+    cityNameEn: 'Addis Ababa (Nationwide travel)',
+    cityNameAm: 'አዲስ አበባ (ለመላው ኢትዮጵያ ጉዞ)',
+    cityNameAr: 'أديس أبابا (متاح لجميع مناطق إثيوبيا)',
+    lat: 9.03,
+    lng: 38.75,
+    priceETB: 9500,
+    priceUnit: 'day',
+    rating: 4.96,
+    reviewsCount: 84,
+    instantBook: true,
+    verifiedHost: true,
+    trustScore: '100%',
+    hostName: 'Yonas Gebre',
+    hostPhone: '+251 91 222 3344',
+    hostTelebirr: '+251 91 222 3344',
+    status: 'Available',
+    cancellation: 'freeCancel',
+    guestsMax: 5,
+    bedrooms: 0,
+    bathrooms: 0,
+    amenities: ['ac', 'wifi', 'security'],
+    images: [
+      'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=800&q=80'
+    ],
+    descriptionEn: 'Fully equipped 4x4 Land Cruiser with dual fuel tanks, AC, mobile Wi-Fi, and experienced English/Amharic speaking driver suitable for Highlands, Omo Valley, or Danakil.',
+    descriptionAm: 'ለረጅም ጉዞ እና ለተራራማ ቦታዎች ተስማሚ የሆነ ቶዮታ ላንድ ክሩዘር ከታማኝ ሹፌር ጋር።',
+    descriptionAr: 'سيارة تويوتا لاند كروزر برادو مجهزة بأحدث وسائل الراحة وتكييف قوي وسائق مرخص يتحدث الإنجليزية والأمهرية مناسبة لجميع التضاريس.'
+  },
+  {
+    id: 'wheel-2',
+    category: 'wheels',
+    subType: 'Minibus',
+    subTypeAm: 'ሚኒባስ',
+    subTypeAr: 'حافلة صغيرة تويوتا هايس',
+    titleEn: 'Toyota HiAce Luxury 12-Seater Tourist Van',
+    titleAm: 'ቶዮታ ሃይኤስ ባለ 12 መቀመጫ የቱሪስት ሚኒባስ',
+    titleAr: 'حافلة تويوتا هايس السياحية الفاخرة 12 راكباً',
+    cityId: 'bahirdar',
+    cityNameEn: 'Bahir Dar & Northern Circuit',
+    cityNameAm: 'ባህር ዳር እና የሰሜን መስመር',
+    cityNameAr: 'بحر دار والمسار السياحي الشمالي',
+    lat: 11.59,
+    lng: 37.39,
+    priceETB: 7200,
+    priceUnit: 'day',
+    rating: 4.89,
+    reviewsCount: 31,
+    instantBook: false,
+    verifiedHost: true,
+    trustScore: '96%',
+    hostName: 'Alemayehu Kassa',
+    hostPhone: '+251 92 333 4455',
+    hostTelebirr: '+251 92 333 4455',
+    status: 'Available',
+    cancellation: 'moderateCancel',
+    guestsMax: 12,
+    bedrooms: 0,
+    bathrooms: 0,
+    amenities: ['ac', 'security'],
+    images: [
+      'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=800&q=80'
+    ],
+    descriptionEn: 'High-roof Toyota HiAce configured for comfort with reclining seats, large luggage space, dual AC, microphone PA system, and veteran Blue Nile falls driver.',
+    descriptionAm: 'ለቡድንና ለቤተሰብ ጉዞ ተስማሚ የሆነ ባለ 12 መቀመጫ ሚኒባስ ከአየር ማቀዝቀዣ ጋር።',
+    descriptionAr: 'حافلة سياحية مريحة تتسع لـ 12 راكباً مع تكييف مزدوج ومساحة رحبة للحقائب وسائق خبير بالطرق السياحية.'
+  },
+  {
+    id: 'wheel-3',
+    category: 'wheels',
+    subType: 'Sedan',
+    subTypeAm: 'ሴዳን መኪና',
+    subTypeAr: 'سيارة سيدان كورولا حديثة',
+    titleEn: 'Executive Hyundai Elantra / Toyota Corolla Hybrid',
+    titleAm: 'ዘመናዊ ኮሮላ / ኤላንትራ ሴዳን መኪና ለአዲስ አበባ',
+    titleAr: 'سيارة سيدان اقتصادية حديثة لمدينة أديس أبابا',
+    cityId: 'addis',
+    cityNameEn: 'Bole Airport & Addis Downtown',
+    cityNameAm: 'ቦሌ አውሮፕላን ማረፊያ እና አዲስ አበባ ከተማ',
+    cityNameAr: 'مطار بولي ووسط مدينة أديس أبابا',
+    lat: 9.01,
+    lng: 38.77,
+    priceETB: 3500,
+    priceUnit: 'day',
+    rating: 4.93,
+    reviewsCount: 65,
+    instantBook: true,
+    verifiedHost: true,
+    trustScore: '99%',
+    hostName: 'Ermias Berhanu',
+    hostPhone: '+251 93 444 5566',
+    hostTelebirr: '+251 93 444 5566',
+    status: 'Available',
+    cancellation: 'freeCancel',
+    guestsMax: 4,
+    bedrooms: 0,
+    bathrooms: 0,
+    amenities: ['ac', 'wifi'],
+    images: [
+      'https://images.unsplash.com/photo-1550355291-bbee04a92027?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1489824904134-891ab64532f1?auto=format&fit=crop&w=800&q=80'
+    ],
+    descriptionEn: 'Pristine city car with unlimited airport pickups, smooth automatic transmission, chilled AC, USB fast chargers, and driver-on-demand option.',
+    descriptionAm: 'ለከተማ ውስጥ ጉዞ፣ ለአውሮፕላን ማረፊያ መቀበያ እና ለስብሰባዎች ምቹ ዘመናዊ ሴዳን መኪና።',
+    descriptionAr: 'سيارة سيدان أنيقة ومريحة للتنقل داخل العاصمة أديس أبابا واستقبال المطار مع تكييف ممتاز وشواحن سريعة.'
+  },
+
+  // ================= EXPERIENCES =================
+  {
+    id: 'exp-1',
+    category: 'experiences',
+    subType: 'Cultural Ceremony',
+    subTypeAm: 'ባህላዊ ስነ-ስርዓት',
+    subTypeAr: 'مراسم القهوة الإثيوبية التراثية',
+    titleEn: 'Authentic 3-Round Ethiopian Coffee Ceremony & Food Tasting',
+    titleAm: 'የ3 ዙር ባህላዊ የኢትዮጵያ ቡና አፈላል እና የምግብ ቅምሻ',
+    titleAr: 'مراسم القهوة الإثيوبية التقليدية الثلاثية مع تذوق المأكولات',
+    cityId: 'addis',
+    cityNameEn: 'Piazza / Old Town, Addis Ababa',
+    cityNameAm: 'ፒያሳ፣ አዲስ አበባ',
+    cityNameAr: 'بياتسا التاريخية، أديس أبابا',
+    lat: 9.035,
+    lng: 38.752,
+    priceETB: 1200,
+    priceUnit: 'person',
+    rating: 4.98,
+    reviewsCount: 112,
+    instantBook: true,
+    verifiedHost: true,
+    trustScore: '100%',
+    hostName: 'Tigist Hailu',
+    hostPhone: '+251 94 555 6677',
+    hostTelebirr: '+251 94 555 6677',
+    status: 'Available',
+    cancellation: 'freeCancel',
+    guestsMax: 10,
+    bedrooms: 0,
+    bathrooms: 0,
+    amenities: ['wifi'],
+    images: [
+      'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80'
+    ],
+    descriptionEn: 'Experience the soul of Ethiopia: raw bean washing, charcoal roasting over frankincense, hand-grinding, and brewing the 3 traditional rounds (Abol, Tona, Baraka) with popcorn and fresh dabo.',
+    descriptionAm: 'የኢትዮጵያን እውነተኛ የቡና ባህል የሚለማመዱበት፡ የቡና ማጠብ፣ ማመስ፣ መውቀጥ እና አቦል፣ ቶና፣ በረካ 3 ዙር ከፈንድሻ እና ዳቦ ጋር።',
+    descriptionAr: 'عش أصالة الضيافة الإثيوبية مع طقوس غسل البن وتحميصه على الفحم وتصاعد رائحة البخور وإعداد دورات القهوة الثلاث الشهيرة مع الفشار والخبز الطازج.'
+  },
+  {
+    id: 'exp-2',
+    category: 'experiences',
+    subType: 'Historical Trek',
+    subTypeAm: 'ታሪካዊ ጉዞ',
+    subTypeAr: 'جولة كنائس لاليبيلا الصخرية',
+    titleEn: 'Guided Sacred Lalibela 11 Monolithic Churches & Sunset Chanting',
+    titleAm: 'የተቀደሱት 11ዱ የላሊበላ ውቅር አብያተ ክርስቲያናት እና የፀሐይ መግቢያ ዝማሬ',
+    titleAr: 'جولة إرشادية في كنائس لاليبيلا الصخرية الـ 11 والتراتيل المسائية',
+    cityId: 'lalibela',
+    cityNameEn: 'UNESCO Lalibela',
+    cityNameAm: 'ዩኔስኮ ላሊበላ',
+    cityNameAr: 'موقع التراث العالمي لاليبيلا',
+    lat: 12.031,
+    lng: 39.041,
+    priceETB: 2800,
+    priceUnit: 'person',
+    rating: 4.99,
+    reviewsCount: 95,
+    instantBook: true,
+    verifiedHost: true,
+    trustScore: '100%',
+    hostName: 'Deacon Yohannes',
+    hostPhone: '+251 95 666 7788',
+    hostTelebirr: '+251 95 666 7788',
+    status: 'Available',
+    cancellation: 'freeCancel',
+    guestsMax: 8,
+    bedrooms: 0,
+    bathrooms: 0,
+    amenities: ['security'],
+    images: [
+      'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=800&q=80'
+    ],
+    descriptionEn: 'Deep architectural and spiritual tour of Bete Giyorgis (House of St. George) and all 11 12th-century churches led by an accredited ecclesiastical historian.',
+    descriptionAm: 'የቤተ ጊዮርጊስ እና የሁሉም 11 ውቅር አብያተ ክርስቲያናት ጥልቅ የታሪክና የመንፈሳዊ ጉብኝት ከታሪክ ተመራማሪ መሪ ጋር።',
+    descriptionAr: 'جولة تاريخية وروحية متعمقة في كنيسة القديس جرجس وجميع الكنائس الـ 11 المنحوتة في الصخر بقيادة مؤرخ معتمد.'
+  },
+  {
+    id: 'exp-3',
+    category: 'experiences',
+    subType: 'Boat Safari',
+    subTypeAm: 'የጀልባ ሳፋሪ',
+    subTypeAr: 'سفاري القوارب وسوق الأسماك بحيرة هواسا',
+    titleEn: 'Lake Hawassa Hippo Safari & Morning Fish Market Cooking',
+    titleAm: 'የሀዋሳ ሐይቅ ጉማሬ ሳፋሪ እና የዓሳ ገበያ ጥብስ ዝግጅት',
+    titleAr: 'سفاري أفراس النهر في بحيرة هواسا وتجربة طهي السمك الطازج',
+    cityId: 'hawassa',
+    cityNameEn: 'Lake Hawassa Port',
+    cityNameAm: 'የሀዋሳ ሐይቅ ወደብ',
+    cityNameAr: 'ميناء بحيرة هواسا',
+    lat: 7.061,
+    lng: 38.479,
+    priceETB: 1800,
+    priceUnit: 'person',
+    rating: 4.87,
+    reviewsCount: 42,
+    instantBook: false,
+    verifiedHost: true,
+    trustScore: '97%',
+    hostName: 'Nebiyu Tulu',
+    hostPhone: '+251 96 777 8899',
+    hostTelebirr: '+251 96 777 8899',
+    status: 'Available',
+    cancellation: 'moderateCancel',
+    guestsMax: 6,
+    bedrooms: 0,
+    bathrooms: 0,
+    amenities: ['security'],
+    images: [
+      'https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80'
+    ],
+    descriptionEn: 'Glide on motor launch alongside wild hippopotamuses, observe marabou storks, and visit the vibrant Hawassa fish market for grilled tilapia with mitmita and lime.',
+    descriptionAm: 'በሞተር ጀልባ የሀዋሳ ሐይቅ ጉማሬዎችን መጎብኘት እና ዝነኛውን የሀዋሳ ዓሳ በምጥሚጣና ሎሚ መቅመስ።',
+    descriptionAr: 'رحلة بالقارب لمشاهدة أفراس النهر البرية والطيور المائية وزيارة سوق الأسماك الشهير وتذوق سمك البلطي المشوي الطازج.'
+  }
+];
+
+window.ethiopianCities = ethiopianCities;
+window.sponsoredAds = sponsoredAds;
+window.listingsData = listingsData;
+
+
+/* === INLINED js/app.js === */
+// TripTap — Master App Orchestrator
+
+class TripTapApp {
+  constructor() {
+    this.currentLang = localStorage.getItem('triptap_lang') || 'en';
+    this.currentTheme = localStorage.getItem('triptap_theme') || 'light';
+    this.currentCategory = 'stays'; // stays, wheels, experiences
+    this.currentView = 'split'; // grid, split, map
+    this.activeCity = 'all';
+    this.wishlist = new Set(JSON.parse(localStorage.getItem('triptap_wishlist') || '[]'));
+    this.promoIndex = 0;
+    this.promoTimer = null;
+    this.init();
+  }
+
+  init() {
+    this.applyTheme(this.currentTheme);
+    this.applyLanguage(this.currentLang);
+    this.setupEventListeners();
+    this.startPromoCarousel();
+    this.updateWishlistCount();
+  }
+
+  // --- Localization ---
+  applyLanguage(lang) {
+    if (!window.translations || !window.translations[lang]) return;
+    this.currentLang = lang;
+    localStorage.setItem('triptap_lang', lang);
+
+    const t = window.translations[lang];
+    document.documentElement.lang = lang;
+    document.documentElement.dir = t.dir || 'ltr';
+
+    // Update active state in language buttons
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+
+    // Translate all elements with data-i18n attribute
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const keyPath = el.dataset.i18n.split('.');
+      let val = t;
+      for (const k of keyPath) {
+        if (val && val[k] !== undefined) {
+          val = val[k];
+        } else {
+          val = null;
+          break;
+        }
+      }
+      if (val !== null) {
+        if (el.tagName === 'INPUT' && el.type === 'text') {
+          el.placeholder = val;
+        } else {
+          el.textContent = val;
+        }
+      }
+    });
+
+    // Translate dynamic hero title & subtitle
+    this.updateHeroText();
+
+    // Trigger re-render of search & listings if initialized
+    if (window.searchEngine) {
+      window.searchEngine.renderCityChips();
+      window.searchEngine.applyFilters();
+    }
+  }
+
+  // --- Theme (Light / Dark) ---
+  applyTheme(theme) {
+    this.currentTheme = theme;
+    localStorage.setItem('triptap_theme', theme);
+    document.documentElement.setAttribute('data-theme', theme);
+    const themeIcon = document.getElementById('theme-icon');
+    if (themeIcon) {
+      themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+    }
+  }
+
+  toggleTheme() {
+    const next = this.currentTheme === 'light' ? 'dark' : 'light';
+    this.applyTheme(next);
+    this.showToast(next === 'dark' ? 'Midnight Blue Mode Activated' : 'Clean White & Blue Mode Activated');
+  }
+
+  // --- Category Switching ---
+  switchCategory(cat) {
+    this.currentCategory = cat;
+    const heroEl = document.querySelector('.hero-section');
+    if (heroEl) {
+      heroEl.setAttribute('data-category', cat);
+    }
+
+    document.querySelectorAll('.category-tab-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.category === cat);
+    });
+
+    this.updateHeroText();
+
+    if (window.searchEngine) {
+      window.searchEngine.applyFilters();
+    }
+  }
+
+  updateHeroText() {
+    const t = window.translations[this.currentLang].hero;
+    const titleEl = document.getElementById('hero-title');
+    const subEl = document.getElementById('hero-subtitle');
+    if (!titleEl || !subEl) return;
+
+    if (this.currentCategory === 'stays') {
+      titleEl.textContent = t.staysTitle;
+      subEl.textContent = t.staysSub;
+    } else if (this.currentCategory === 'wheels') {
+      titleEl.textContent = t.wheelsTitle;
+      subEl.textContent = t.wheelsSub;
+    } else if (this.currentCategory === 'experiences') {
+      titleEl.textContent = t.experiencesTitle;
+      subEl.textContent = t.experiencesSub;
+    }
+  }
+
+  // --- View Mode Toggle ---
+  switchView(mode) {
+    this.currentView = mode;
+    const container = document.getElementById('listings-view-container');
+    if (!container) return;
+
+    container.className = 'listings-view-container ' + (mode === 'split' ? 'split-mode' : mode === 'map' ? 'map-only' : 'grid-only');
+
+    document.querySelectorAll('.view-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.view === mode);
+    });
+
+    if ((mode === 'split' || mode === 'map') && window.leafletMapEngine) {
+      setTimeout(() => window.leafletMapEngine.invalidateSize(), 150);
+    }
+  }
+
+  // --- Sponsored Business Carousel ---
+  startPromoCarousel() {
+    const slides = document.querySelectorAll('.promo-slide');
+    if (!slides.length) return;
+
+    const showSlide = (idx) => {
+      slides.forEach((s, i) => s.classList.toggle('active', i === idx));
+      const activeSlide = slides[idx];
+      const duration = parseInt(activeSlide.dataset.duration, 10) || 5000;
+      
+      const progressFill = document.getElementById('promo-progress-fill');
+      if (progressFill) {
+        progressFill.style.transition = 'none';
+        progressFill.style.width = '0%';
+        setTimeout(() => {
+          progressFill.style.transition = `width ${duration}ms linear`;
+          progressFill.style.width = '100%';
+        }, 30);
+      }
+
+      clearTimeout(this.promoTimer);
+      this.promoTimer = setTimeout(() => {
+        this.promoIndex = (this.promoIndex + 1) % slides.length;
+        showSlide(this.promoIndex);
+      }, duration);
+    };
+
+    showSlide(0);
+  }
+
+  // --- Wishlist / Favorites ---
+  toggleWishlist(listingId) {
+    const isSaved = this.wishlist.has(listingId);
+    if (isSaved) {
+      this.wishlist.delete(listingId);
+      this.showToast(this.currentLang === 'am' ? 'ከተወዳጆች ተሰርዟል' : this.currentLang === 'ar' ? 'تمت الإزالة من المفضلة' : 'Removed from wishlist');
+    } else {
+      this.wishlist.add(listingId);
+      this.showToast(this.currentLang === 'am' ? 'ወደ ተወዳጆች ተጨምሯል' : this.currentLang === 'ar' ? 'تمت الإضافة إلى المفضلة' : 'Added to wishlist');
+    }
+    localStorage.setItem('triptap_wishlist', JSON.stringify([...this.wishlist]));
+    this.updateWishlistCount();
+
+    document.querySelectorAll(`.card-wishlist-btn[data-id="${listingId}"]`).forEach(btn => {
+      btn.classList.toggle('active', !isSaved);
+    });
+  }
+
+  updateWishlistCount() {
+    const badge = document.getElementById('wishlist-badge');
+    if (badge) {
+      badge.textContent = this.wishlist.size;
+      badge.style.display = this.wishlist.size > 0 ? 'flex' : 'none';
+    }
+  }
+
+  // --- Toast Notifications ---
+  showToast(msg) {
+    const container = document.getElementById('toast-container');
+    if (!container) return;
+    const toast = document.createElement('div');
+    toast.className = 'toast-msg';
+    toast.innerHTML = `<span>ℹ️</span> <span>${msg}</span>`;
+    container.appendChild(toast);
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateY(10px)';
+      setTimeout(() => toast.remove(), 300);
+    }, 3500);
+  }
+
+  setupEventListeners() {
+    // Language switcher buttons
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => this.applyLanguage(btn.dataset.lang));
+    });
+
+    // Theme toggle button
+    const themeBtn = document.getElementById('theme-toggle-btn');
+    if (themeBtn) {
+      themeBtn.addEventListener('click', () => this.toggleTheme());
+    }
+
+    // Category tabs buttons
+    document.querySelectorAll('.category-tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => this.switchCategory(btn.dataset.category));
+    });
+
+    // View mode buttons
+    document.querySelectorAll('.view-btn').forEach(btn => {
+      btn.addEventListener('click', () => this.switchView(btn.dataset.view));
+    });
+
+    // Mobile floating map toggle button
+    const mobileMapToggle = document.getElementById('mobile-map-toggle');
+    if (mobileMapToggle) {
+      mobileMapToggle.addEventListener('click', () => {
+        const next = this.currentView === 'map' ? 'grid' : 'map';
+        this.switchView(next);
+        mobileMapToggle.textContent = next === 'map' ? '📋 Show List' : '🗺️ Show Map';
+      });
+    }
+  }
+}
+
+window.app = new TripTapApp();
+
+
+/* === INLINED js/search.js === */
+// TripTap — Search, Filters, Popovers & Listing Renderer
+
+class SearchEngine {
+  constructor() {
+    this.checkInDate = null;
+    this.checkOutDate = null;
+    this.guests = { adults: 1, children: 0, rooms: 1 };
+    this.selectedCity = 'all';
+    this.maxPrice = 12000;
+    this.selectedAmenities = new Set();
+    this.bookingMethod = 'all'; // all, instant, request
+    this.calCurrentMonth = new Date().getMonth();
+    this.calCurrentYear = new Date().getFullYear();
+    this.init();
+  }
+
+  init() {
+    this.renderCityChips();
+    this.renderCityDropdown();
+    this.setupPopovers();
+    this.setupCalendar();
+    this.setupGuestCounters();
+    this.setupFilterModal();
+    this.applyFilters();
+  }
+
+  // --- Ethiopian City Chips ---
+  renderCityChips() {
+    const container = document.getElementById('city-chips-container');
+    if (!container) return;
+
+    const lang = window.app.currentLang;
+    container.innerHTML = window.ethiopianCities.map(city => {
+      const name = lang === 'am' ? city.nameAm : lang === 'ar' ? city.nameAr : city.nameEn;
+      const isActive = this.selectedCity === city.id;
+      return `
+        <button class="city-chip ${isActive ? 'active' : ''}" data-city-id="${city.id}">
+          <span>📍</span>
+          <span>${name}</span>
+          <span style="font-size:0.75rem;opacity:0.75">(${city.count})</span>
+        </button>
+      `;
+    }).join('');
+
+    container.querySelectorAll('.city-chip').forEach(btn => {
+      btn.addEventListener('click', () => {
+        this.selectedCity = btn.dataset.cityId;
+        this.renderCityChips();
+        this.updateWhereDisplay();
+        this.applyFilters();
+      });
+    });
+  }
+
+  renderCityDropdown() {
+    const list = document.getElementById('city-options-list');
+    if (!list) return;
+    const lang = window.app.currentLang;
+    list.innerHTML = window.ethiopianCities.map(city => {
+      const name = lang === 'am' ? city.nameAm : lang === 'ar' ? city.nameAr : city.nameEn;
+      return `
+        <div class="city-option-item" data-city-id="${city.id}">
+          <span style="font-weight:600">📍 ${name}</span>
+          <span style="font-size:0.78rem;color:var(--text-subtle)">${city.count} listings</span>
+        </div>
+      `;
+    }).join('');
+
+    list.querySelectorAll('.city-option-item').forEach(item => {
+      item.addEventListener('click', () => {
+        this.selectedCity = item.dataset.cityId;
+        this.updateWhereDisplay();
+        this.renderCityChips();
+        this.closeAllPopovers();
+        this.applyFilters();
+      });
+    });
+  }
+
+  updateWhereDisplay() {
+    const display = document.getElementById('search-where-value');
+    if (!display) return;
+    const city = window.ethiopianCities.find(c => c.id === this.selectedCity);
+    const lang = window.app.currentLang;
+    if (city) {
+      display.textContent = lang === 'am' ? city.nameAm : lang === 'ar' ? city.nameAr : city.nameEn;
+    } else {
+      display.textContent = 'All Ethiopia';
+    }
+  }
+
+  // --- Popovers (Where, Calendar, Guests) ---
+  setupPopovers() {
+    const segWhere = document.getElementById('segment-where');
+    const segDates = document.getElementById('segment-dates');
+    const segGuests = document.getElementById('segment-guests');
+
+    const popWhere = document.getElementById('where-popover');
+    const popCal = document.getElementById('calendar-popover');
+    const popGuests = document.getElementById('guests-popover');
+
+    segWhere?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = popWhere.classList.contains('open');
+      this.closeAllPopovers();
+      if (!isOpen) popWhere.classList.add('open');
+    });
+
+    segDates?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = popCal.classList.contains('open');
+      this.closeAllPopovers();
+      if (!isOpen) popCal.classList.add('open');
+    });
+
+    segGuests?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = popGuests.classList.contains('open');
+      this.closeAllPopovers();
+      if (!isOpen) popGuests.classList.add('open');
+    });
+
+    // Close when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.search-bar-wrapper')) {
+        this.closeAllPopovers();
+      }
+    });
+
+    document.querySelectorAll('.popover-card').forEach(p => {
+      p.addEventListener('click', e => e.stopPropagation());
+    });
+  }
+
+  closeAllPopovers() {
+    document.querySelectorAll('.popover-card').forEach(p => p.classList.remove('open'));
+  }
+
+  // --- Interactive Calendar Popover ---
+  setupCalendar() {
+    this.renderCalendarMonth();
+
+    document.getElementById('cal-prev-btn')?.addEventListener('click', () => {
+      this.calCurrentMonth--;
+      if (this.calCurrentMonth < 0) {
+        this.calCurrentMonth = 11;
+        this.calCurrentYear--;
+      }
+      this.renderCalendarMonth();
+    });
+
+    document.getElementById('cal-next-btn')?.addEventListener('click', () => {
+      this.calCurrentMonth++;
+      if (this.calCurrentMonth > 11) {
+        this.calCurrentMonth = 0;
+        this.calCurrentYear++;
+      }
+      this.renderCalendarMonth();
+    });
+
+    document.getElementById('cal-clear-btn')?.addEventListener('click', () => {
+      this.checkInDate = null;
+      this.checkOutDate = null;
+      this.updateDateDisplay();
+      this.renderCalendarMonth();
+    });
+  }
+
+  renderCalendarMonth() {
+    const grid = document.getElementById('calendar-days-grid');
+    const title = document.getElementById('cal-month-title');
+    if (!grid || !title) return;
+
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    title.textContent = `${monthNames[this.calCurrentMonth]} ${this.calCurrentYear}`;
+
+    grid.innerHTML = '';
+    const firstDay = new Date(this.calCurrentYear, this.calCurrentMonth, 1).getDay();
+    const daysInMonth = new Date(this.calCurrentYear, this.calCurrentMonth + 1, 0).getDate();
+
+    // Fill leading empty cells
+    for (let i = 0; i < firstDay; i++) {
+      const empty = document.createElement('div');
+      grid.appendChild(empty);
+    }
+
+    const today = new Date();
+    today.setHours(0,0,0,0);
+
+    for (let d = 1; d <= daysInMonth; d++) {
+      const cell = document.createElement('div');
+      cell.className = 'cal-day-cell';
+      cell.textContent = d;
+
+      const dateObj = new Date(this.calCurrentYear, this.calCurrentMonth, d);
+      if (dateObj < today) {
+        cell.classList.add('disabled');
+      } else {
+        const time = dateObj.getTime();
+        if (this.checkInDate && time === this.checkInDate.getTime()) {
+          cell.classList.add('selected');
+        } else if (this.checkOutDate && time === this.checkOutDate.getTime()) {
+          cell.classList.add('selected');
+        } else if (this.checkInDate && this.checkOutDate && time > this.checkInDate.getTime() && time < this.checkOutDate.getTime()) {
+          cell.classList.add('range');
+        }
+
+        cell.addEventListener('click', () => this.handleDateSelect(dateObj));
+      }
+      grid.appendChild(cell);
+    }
+  }
+
+  handleDateSelect(date) {
+    if (!this.checkInDate || (this.checkInDate && this.checkOutDate)) {
+      this.checkInDate = date;
+      this.checkOutDate = null;
+    } else if (this.checkInDate && !this.checkOutDate) {
+      if (date <= this.checkInDate) {
+        this.checkInDate = date;
+      } else {
+        this.checkOutDate = date;
+        this.closeAllPopovers();
+      }
+    }
+    this.updateDateDisplay();
+    this.renderCalendarMonth();
+  }
+
+  updateDateDisplay() {
+    const valEl = document.getElementById('search-dates-value');
+    if (!valEl) return;
+    if (this.checkInDate && this.checkOutDate) {
+      const diffTime = Math.abs(this.checkOutDate - this.checkInDate);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      const inStr = `${this.checkInDate.toLocaleString('default', { month: 'short' })} ${this.checkInDate.getDate()}`;
+      const outStr = `${this.checkOutDate.toLocaleString('default', { month: 'short' })} ${this.checkOutDate.getDate()}`;
+      valEl.textContent = `${inStr} – ${outStr} (${diffDays} n)`;
+    } else if (this.checkInDate) {
+      valEl.textContent = `From ${this.checkInDate.toLocaleString('default', { month: 'short' })} ${this.checkInDate.getDate()}`;
+    } else {
+      valEl.textContent = window.translations[window.app.currentLang].search.selectDates;
+    }
+  }
+
+  // --- Guests Counters ---
+  setupGuestCounters() {
+    ['adults', 'children', 'rooms'].forEach(key => {
+      document.getElementById(`btn-plus-${key}`)?.addEventListener('click', () => {
+        this.guests[key]++;
+        this.updateGuestCounts();
+      });
+      document.getElementById(`btn-minus-${key}`)?.addEventListener('click', () => {
+        if (key === 'adults' && this.guests[key] > 1) this.guests[key]--;
+        if (key === 'children' && this.guests[key] > 0) this.guests[key]--;
+        if (key === 'rooms' && this.guests[key] > 1) this.guests[key]--;
+        this.updateGuestCounts();
+      });
+    });
+
+    document.getElementById('guests-apply-btn')?.addEventListener('click', () => {
+      this.closeAllPopovers();
+    });
+  }
+
+  updateGuestCounts() {
+    ['adults', 'children', 'rooms'].forEach(k => {
+      const numEl = document.getElementById(`count-${k}`);
+      if (numEl) numEl.textContent = this.guests[k];
+    });
+
+    const display = document.getElementById('search-guests-value');
+    if (display) {
+      const totalGuests = this.guests.adults + this.guests.children;
+      display.textContent = `${totalGuests} guests, ${this.guests.rooms} room`;
+    }
+  }
+
+  // --- Filter Modal ---
+  setupFilterModal() {
+    const openBtn = document.getElementById('open-filters-btn');
+    const modal = document.getElementById('filter-modal');
+    const closeBtn = document.getElementById('close-filter-modal');
+    const applyBtn = document.getElementById('apply-filters-btn');
+    const resetBtn = document.getElementById('reset-filters-btn');
+    const priceSlider = document.getElementById('filter-price-slider');
+    const priceVal = document.getElementById('filter-price-val');
+
+    openBtn?.addEventListener('click', () => modal.classList.add('open'));
+    closeBtn?.addEventListener('click', () => modal.classList.remove('open'));
+
+    priceSlider?.addEventListener('input', (e) => {
+      this.maxPrice = parseInt(e.target.value, 10);
+      if (priceVal) priceVal.textContent = `ETB ${this.maxPrice.toLocaleString()}`;
+    });
+
+    document.querySelectorAll('.filter-amenity-checkbox').forEach(box => {
+      box.addEventListener('change', () => {
+        if (box.checked) {
+          this.selectedAmenities.add(box.value);
+        } else {
+          this.selectedAmenities.delete(box.value);
+        }
+      });
+    });
+
+    resetBtn?.addEventListener('click', () => {
+      this.maxPrice = 12000;
+      if (priceSlider) priceSlider.value = 12000;
+      if (priceVal) priceVal.textContent = 'ETB 12,000';
+      this.selectedAmenities.clear();
+      document.querySelectorAll('.filter-amenity-checkbox').forEach(box => box.checked = false);
+      this.bookingMethod = 'all';
+      this.applyFilters();
+      modal.classList.remove('open');
+    });
+
+    applyBtn?.addEventListener('click', () => {
+      this.applyFilters();
+      modal.classList.remove('open');
+    });
+  }
+
+  // --- Filter Evaluation & Render ---
+  applyFilters() {
+    const cat = window.app.currentCategory;
+    const lang = window.app.currentLang;
+
+    let results = window.listingsData.filter(item => {
+      // 3-Status listing check (On Maintenance hidden from traveler feed)
+      if (item.status === 'On Maintenance') return false;
+
+      // Category check
+      if (item.category !== cat) return false;
+
+      // City check
+      if (this.selectedCity !== 'all' && item.cityId !== this.selectedCity) return false;
+
+      // Price check
+      if (item.priceETB > this.maxPrice) return false;
+
+      // Booking method
+      if (this.bookingMethod === 'instant' && !item.instantBook) return false;
+      if (this.bookingMethod === 'request' && item.instantBook) return false;
+
+      // Amenities check
+      if (this.selectedAmenities.size > 0) {
+        for (const am of this.selectedAmenities) {
+          if (!item.amenities.includes(am)) return false;
+        }
+      }
+
+      return true;
+    });
+
+    this.renderListings(results);
+
+    // Update result count banner
+    const statsEl = document.getElementById('results-stats-count');
+    if (statsEl) {
+      statsEl.textContent = `${results.length} ${window.translations[lang].view.resultsCount}`;
+    }
+
+    // Synchronize Leaflet Map Pins
+    if (window.leafletMapEngine) {
+      window.leafletMapEngine.updateMarkers(results);
+    }
+  }
+
+  renderListings(items) {
+    const grid = document.getElementById('listings-cards-grid');
+    if (!grid) return;
+
+    if (items.length === 0) {
+      grid.innerHTML = `
+        <div style="grid-column: 1/-1; text-align:center; padding: 60px 20px; background:var(--bg-card); border-radius:var(--radius-lg); border:1px solid var(--border-light)">
+          <div style="font-size:2.5rem; margin-bottom:12px">🔍</div>
+          <h3 style="font-size:1.3rem; font-weight:700; color:var(--text-main); margin-bottom:8px">No places found matching your criteria</h3>
+          <p style="color:var(--text-muted)">Try adjusting your price range or clearing some amenity filters.</p>
+        </div>
+      `;
+      return;
+    }
+
+    const lang = window.app.currentLang;
+    const t = window.translations[lang].listing;
+
+    grid.innerHTML = items.map(item => {
+      const isSaved = window.app.wishlist.has(item.id);
+      const title = lang === 'am' ? item.titleAm : lang === 'ar' ? item.titleAr : item.titleEn;
+      const city = lang === 'am' ? item.cityNameAm : lang === 'ar' ? item.cityNameAr : item.cityNameEn;
+      const unitLabel = item.priceUnit === 'day' ? t.perDay : item.priceUnit === 'person' ? t.perPerson : t.perNight;
+
+      // Render amenity tags (Generator, Water Tank, WiFi)
+      const amenityTags = item.amenities.slice(0, 3).map(am => {
+        let label = am;
+        if (am === 'generator') label = '⚡ Generator';
+        if (am === 'waterTank') label = '💧 Water Tank';
+        if (am === 'wifi') label = '📶 WiFi';
+        if (am === 'ac') label = '❄️ AC';
+        return `<span class="amenity-pill">${label}</span>`;
+      }).join('');
+
+      return `
+        <div class="listing-card" id="card-${item.id}" data-id="${item.id}">
+          <div class="card-media-wrapper">
+            <img class="card-img-slide" id="img-${item.id}" src="${item.images[0]}" alt="${title}" loading="lazy" />
+            
+            <button class="carousel-nav-btn carousel-prev" onclick="window.searchEngine.slidePhoto('${item.id}', -1, event)">‹</button>
+            <button class="carousel-nav-btn carousel-next" onclick="window.searchEngine.slidePhoto('${item.id}', 1, event)">›</button>
+            
+            <div class="carousel-dots" id="dots-${item.id}">
+              ${item.images.map((_, idx) => `<span class="carousel-dot ${idx === 0 ? 'active' : ''}"></span>`).join('')}
+            </div>
+
+            <div class="card-badge-container">
+              <span class="badge-telebirr">Telebirr Exclusive</span>
+              ${item.instantBook ? `<span class="badge-trust">${t.instantBadge}</span>` : ''}
+            </div>
+
+            <button class="card-wishlist-btn ${isSaved ? 'active' : ''}" data-id="${item.id}" onclick="window.app.toggleWishlist('${item.id}')" aria-label="Save to Wishlist">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="${isSaved ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2.2">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+              </svg>
+            </button>
+          </div>
+
+          <div class="card-content">
+            <div class="card-header-row">
+              <div class="card-location">📍 ${city}</div>
+              <div class="card-rating-badge"><span class="star">★</span> ${item.rating} (${item.reviewsCount})</div>
+            </div>
+
+            <h3 class="card-title">${title}</h3>
+
+            <div class="card-amenities-row">
+              ${amenityTags}
+            </div>
+
+            <div class="card-footer-row">
+              <div class="card-price-block">
+                <span class="card-price-num">ETB ${item.priceETB.toLocaleString()}</span>
+                <span class="card-price-label">${unitLabel}</span>
+              </div>
+
+              <button class="card-book-action-btn" onclick="window.bookingEngine.openBookingModal('${item.id}')">
+                <span>${t.bookNow}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    // Setup hover interactions for map highlight
+    grid.querySelectorAll('.listing-card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        const id = card.dataset.id;
+        window.leafletMapEngine?.highlightPin(id, true);
+      });
+      card.addEventListener('mouseleave', () => {
+        const id = card.dataset.id;
+        window.leafletMapEngine?.highlightPin(id, false);
+      });
+    });
+  }
+
+  // --- Card Carousel Slider ---
+  slidePhoto(listingId, direction, event) {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    const item = window.listingsData.find(l => l.id === listingId);
+    if (!item) return;
+
+    if (!item.currentPhotoIdx) item.currentPhotoIdx = 0;
+    item.currentPhotoIdx = (item.currentPhotoIdx + direction + item.images.length) % item.images.length;
+
+    const imgEl = document.getElementById(`img-${listingId}`);
+    if (imgEl) {
+      imgEl.style.opacity = '0.6';
+      imgEl.src = item.images[item.currentPhotoIdx];
+      setTimeout(() => imgEl.style.opacity = '1', 120);
+    }
+
+    const dotsEl = document.getElementById(`dots-${listingId}`);
+    if (dotsEl) {
+      dotsEl.querySelectorAll('.carousel-dot').forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === item.currentPhotoIdx);
+      });
+    }
+  }
+}
+
+window.searchEngine = new SearchEngine();
+
+
+/* === INLINED js/map.js === */
+// TripTap — Leaflet Map Engine with Custom Blue ETB Price Pins
+
+class LeafletMapEngine {
+  constructor() {
+    this.map = null;
+    this.markers = new Map();
+    this.activePinId = null;
+    this.init();
+  }
+
+  init() {
+    const mapEl = document.getElementById('leaflet-map');
+    if (!mapEl || !window.L) return;
+
+    // Centered on Ethiopia (Addis Ababa default)
+    this.map = L.map('leaflet-map', {
+      zoomControl: true,
+      scrollWheelZoom: true
+    }).setView([9.02497, 38.74689], 12);
+
+    // Modern clean tile layer (OpenStreetMap / Carto Positron for sleek white & blue feel)
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://carto.com/">CARTO</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      subdomains: 'abcd',
+      maxZoom: 19
+    }).addTo(this.map);
+  }
+
+  updateMarkers(listings) {
+    if (!this.map || !window.L) return;
+
+    // Clear previous markers
+    this.markers.forEach(marker => this.map.removeLayer(marker));
+    this.markers.clear();
+
+    const bounds = [];
+    const lang = window.app.currentLang;
+
+    listings.forEach(item => {
+      if (!item.lat || !item.lng) return;
+
+      const title = lang === 'am' ? item.titleAm : lang === 'ar' ? item.titleAr : item.titleEn;
+      const priceText = `ETB ${item.priceETB.toLocaleString()}`;
+
+      // Custom Blue Price Marker Icon
+      const customIcon = L.divIcon({
+        className: 'custom-leaflet-pin-wrapper',
+        html: `<div class="custom-price-pin" id="pin-${item.id}" data-id="${item.id}"><span>🇪🇹</span><span>${priceText}</span></div>`,
+        iconSize: [85, 34],
+        iconAnchor: [42, 17]
+      });
+
+      const marker = L.marker([item.lat, item.lng], { icon: customIcon }).addTo(this.map);
+
+      // Popup Content Card
+      const popupHtml = `
+        <div class="map-popup-card">
+          <img class="map-popup-img" src="${item.images[0]}" alt="${title}" />
+          <div class="map-popup-body">
+            <h4 class="map-popup-title">${title}</h4>
+            <div class="map-popup-price">${priceText}</div>
+            <button class="map-popup-link" onclick="window.bookingEngine.openBookingModal('${item.id}')">Book with Telebirr</button>
+          </div>
+        </div>
+      `;
+
+      marker.bindPopup(popupHtml, { maxWidth: 260, offset: [0, -12] });
+
+      marker.on('click', () => {
+        this.highlightCard(item.id);
+      });
+
+      this.markers.set(item.id, marker);
+      bounds.push([item.lat, item.lng]);
+    });
+
+    if (bounds.length > 0) {
+      this.map.fitBounds(bounds, { padding: [40, 40], maxZoom: 14 });
+    }
+  }
+
+  highlightPin(listingId, isActive) {
+    const pin = document.getElementById(`pin-${listingId}`);
+    if (pin) {
+      pin.classList.toggle('active', isActive);
+    }
+  }
+
+  highlightCard(listingId) {
+    document.querySelectorAll('.listing-card').forEach(c => c.classList.remove('highlighted'));
+    const card = document.getElementById(`card-${listingId}`);
+    if (card) {
+      card.classList.add('highlighted');
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
+  invalidateSize() {
+    if (this.map) {
+      this.map.invalidateSize();
+    }
+  }
+}
+
+// Initialized after DOM & Leaflet load
+window.addEventListener('DOMContentLoaded', () => {
+  window.leafletMapEngine = new LeafletMapEngine();
+});
+
+
+/* === INLINED js/booking.js === */
+// TripTap — Booking, Telebirr Checkout, 5-Min Timer & 15-Min Property Check
+
+class BookingEngine {
+  constructor() {
+    this.usedTransactionIds = new Set(['TBL-1111111111', 'TBL-2222222222']); // Existing sample IDs
+    this.activeBooking = null;
+    this.confirmationTimer = null;
+    this.confirmationSecondsLeft = 300; // 5 minutes
+    this.checkInTimer = null;
+    this.checkInSecondsLeft = 900; // 15 minutes
+    this.setupListeners();
+  }
+
+  setupListeners() {
+    document.getElementById('close-booking-modal')?.addEventListener('click', () => {
+      document.getElementById('booking-modal').classList.remove('open');
+    });
+
+    // Receipt file upload preview
+    const receiptInput = document.getElementById('telebirr-receipt-file');
+    receiptInput?.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      const preview = document.getElementById('receipt-preview-img');
+      const container = document.getElementById('receipt-preview-container');
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (evt) => {
+          preview.src = evt.target.result;
+          container.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Submit payment button
+    document.getElementById('submit-telebirr-btn')?.addEventListener('click', () => {
+      this.processTelebirrBooking();
+    });
+
+    // Dispute buttons
+    document.getElementById('btn-report-problem')?.addEventListener('click', () => {
+      this.escalateDisputeToAdmin('Host Unresponsive (5-Minute Confirmation Timeout)');
+    });
+
+    document.getElementById('btn-report-mismatch')?.addEventListener('click', () => {
+      this.reportPropertyMismatch();
+    });
+  }
+
+  openBookingModal(listingId) {
+    const listing = window.listingsData.find(l => l.id === listingId);
+    if (!listing) return;
+
+    this.activeListing = listing;
+    const modal = document.getElementById('booking-modal');
+    const lang = window.app.currentLang;
+    const title = lang === 'am' ? listing.titleAm : lang === 'ar' ? listing.titleAr : listing.titleEn;
+
+    document.getElementById('booking-modal-title').textContent = title;
+    document.getElementById('booking-host-name').textContent = listing.hostName;
+    document.getElementById('booking-host-telebirr').textContent = listing.hostTelebirr;
+    document.getElementById('booking-total-amount').textContent = `ETB ${listing.priceETB.toLocaleString()}`;
+
+    // Reset inputs
+    const txInput = document.getElementById('telebirr-tx-id');
+    if (txInput) txInput.value = '';
+    const fileInput = document.getElementById('telebirr-receipt-file');
+    if (fileInput) fileInput.value = '';
+    const previewContainer = document.getElementById('receipt-preview-container');
+    if (previewContainer) previewContainer.style.display = 'none';
+
+    modal.classList.add('open');
+  }
+
+  processTelebirrBooking() {
+    const txInput = document.getElementById('telebirr-tx-id');
+    const txId = txInput?.value.trim();
+
+    if (!txId) {
+      window.app.showToast('⚠️ Please enter the unique Telebirr Transaction ID');
+      return;
+    }
+
+    // Telebirr transaction ID uniqueness check (Platform Rule)
+    if (this.usedTransactionIds.has(txId)) {
+      window.app.showToast('🚨 Error: Duplicate Telebirr Transaction ID! Every transaction ID must be unique.');
+      return;
+    }
+
+    this.usedTransactionIds.add(txId);
+    document.getElementById('booking-modal').classList.remove('open');
+
+    // Create booking record
+    const booking = {
+      id: 'BK-' + Math.floor(100000 + Math.random() * 900000),
+      listing: this.activeListing,
+      txId: txId,
+      amount: this.activeListing.priceETB,
+      timestamp: new Date().toLocaleTimeString(),
+      status: 'Awaiting Host Confirmation'
+    };
+    this.activeBooking = booking;
+
+    window.app.showToast('✅ Telebirr payment receipt submitted! 5-Minute confirmation timer started.');
+
+    // Auto-open Permanent Chat and start 5-minute confirmation rule
+    window.chatEngine.openChatWithHost(this.activeListing, txId);
+    this.start5MinuteConfirmationTimer();
+
+    // Log to Admin Audit Log
+    window.adminEngine.addAuditEntry(`Telebirr Booking submitted: ${booking.id} (TxID: ${txId}) for ${this.activeListing.titleEn}`);
+  }
+
+  // --- 5-Minute Confirmation Rule (Auto-warning at 3 min, Report Problem at 5 min) ---
+  start5MinuteConfirmationTimer() {
+    clearInterval(this.confirmationTimer);
+    this.confirmationSecondsLeft = 300; // 5:00
+    const clockEl = document.getElementById('timer-clock-display');
+    const warningBox = document.getElementById('timer-warning-box');
+    const reportBtn = document.getElementById('btn-report-problem');
+
+    if (warningBox) warningBox.style.display = 'none';
+    if (reportBtn) reportBtn.style.display = 'none';
+
+    this.confirmationTimer = setInterval(() => {
+      this.confirmationSecondsLeft--;
+      const mins = Math.floor(this.confirmationSecondsLeft / 60);
+      const secs = this.confirmationSecondsLeft % 60;
+      if (clockEl) {
+        clockEl.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+      }
+
+      // Auto-warning sent at 3 minutes (120 seconds left)
+      if (this.confirmationSecondsLeft === 120) {
+        if (warningBox) {
+          warningBox.style.display = 'block';
+          warningBox.textContent = '⚠️ 3-Minute Warning: Reminder SMS & push notification dispatched to host!';
+        }
+        window.app.showToast('⚠️ 3-Minute Warning: Host reminded to confirm Telebirr receipt');
+      }
+
+      // At 5 minutes with no action (0 seconds left)
+      if (this.confirmationSecondsLeft <= 0) {
+        clearInterval(this.confirmationTimer);
+        if (warningBox) {
+          warningBox.textContent = '🚨 5-Minute Timeout: Host failed to confirm. Priority escalation unlocked.';
+        }
+        if (reportBtn) {
+          reportBtn.style.display = 'block';
+        }
+        this.escalateDisputeToAdmin('Automated 5-Minute Confirmation Timeout');
+      }
+    }, 1000);
+  }
+
+  // Host confirms booking simulation (deducts 10% commission from host wallet)
+  simulateHostConfirmation() {
+    clearInterval(this.confirmationTimer);
+    const clockEl = document.getElementById('timer-clock-display');
+    if (clockEl) clockEl.textContent = 'CONFIRMED';
+    const warningBox = document.getElementById('timer-warning-box');
+    if (warningBox) {
+      warningBox.style.display = 'block';
+      warningBox.style.background = '#ecfdf5';
+      warningBox.style.color = '#065f46';
+      warningBox.style.borderColor = '#a7f3d0';
+      warningBox.textContent = '🎉 Host confirmed your booking within 5 minutes! TripTap 10% commission deducted from host wallet.';
+    }
+
+    // Deduct 10% from Host Wallet
+    const commission = Math.round(this.activeBooking.amount * 0.10);
+    window.hostEngine?.deductCommission(commission, this.activeBooking.id);
+
+    window.app.showToast(`🎉 Booking confirmed! 10% commission (${commission} ETB) deducted from host wallet.`);
+    window.adminEngine?.addAuditEntry(`Booking ${this.activeBooking.id} CONFIRMED by Host. Deducted 10% commission (${commission} ETB).`);
+
+    // Start 15-minute property check window
+    this.start15MinutePropertyCheck();
+  }
+
+  // --- 15-Minute Property Check Window ---
+  start15MinutePropertyCheck() {
+    const checkInBox = document.getElementById('checkin-timer-widget');
+    if (checkInBox) checkInBox.style.display = 'flex';
+    this.checkInSecondsLeft = 900; // 15:00
+
+    this.checkInTimer = setInterval(() => {
+      this.checkInSecondsLeft--;
+      const mins = Math.floor(this.checkInSecondsLeft / 60);
+      const secs = this.checkInSecondsLeft % 60;
+      const display = document.getElementById('checkin-clock-display');
+      if (display) {
+        display.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+      }
+
+      if (this.checkInSecondsLeft <= 0) {
+        clearInterval(this.checkInTimer);
+        if (checkInBox) {
+          checkInBox.innerHTML = `
+            <div style="font-size:0.75rem; color:#059669; font-weight:700">
+              ✅ 15-Minute property check window closed. Booking fully finalized with no refund.
+            </div>
+          `;
+        }
+        window.adminEngine?.addAuditEntry(`Booking ${this.activeBooking?.id}: 15-min property inspection window successfully expired with zero disputes.`);
+      }
+    }, 1000);
+  }
+
+  reportPropertyMismatch() {
+    const reason = prompt('Please describe the property mismatch and photo evidence URL/details:');
+    if (reason) {
+      window.adminEngine?.addAuditEntry(`🚨 DISPUTE (Scenario 2): Traveler reported property mismatch on ${this.activeBooking?.id}: "${reason}". Priority case opened.`);
+      window.app.showToast('🚨 Dispute case filed with photo evidence! Admin is reviewing for host refund.');
+    }
+  }
+
+  escalateDisputeToAdmin(reason) {
+    window.adminEngine?.addAuditEntry(`🚨 PRIORITY ESCALATION: ${reason} on Booking ${this.activeBooking?.id}. Chat history & receipt preserved.`);
+    window.app.showToast('🚨 Priority case auto-submitted to Admin Headquarters with chat logs.');
+  }
+}
+
+window.bookingEngine = new BookingEngine();
+
+
+/* === INLINED js/host.js === */
+// TripTap — Host Onboarding Wizard, 1-Listing Limit, 5-15 Photos & Telebirr Wallet
+
+class HostEngine {
+  constructor() {
+    this.currentStep = 1;
+    this.uploadedPhotosCount = 0;
+    this.hasActiveListing = true; // default demo host has 1 listing
+    this.walletBalance = 10000; // Initial 10,000 ETB Telebirr deposit
+    this.listingStatus = 'Available'; // Available, Booked, On Maintenance
+    this.commissionHistory = [];
+    this.init();
+  }
+
+  init() {
+    this.setupWizardListeners();
+    this.setupDashboardListeners();
+    this.updateWalletUI();
+  }
+
+  // --- 3-Step Become a Host Wizard ---
+  setupWizardListeners() {
+    const wizardModal = document.getElementById('host-wizard-modal');
+    document.getElementById('open-host-wizard-btn')?.addEventListener('click', () => {
+      this.currentStep = 1;
+      this.showWizardStep(1);
+      wizardModal.classList.add('open');
+    });
+
+    document.getElementById('close-host-wizard')?.addEventListener('click', () => {
+      wizardModal.classList.remove('open');
+    });
+
+    // Step navigation
+    document.getElementById('wizard-next-btn')?.addEventListener('click', () => {
+      if (this.currentStep === 1) {
+        // Photo rule check: 5 to 15 photos
+        if (this.uploadedPhotosCount < 5) {
+          window.app.showToast('⚠️ Photo Rule: You must upload at least 5 photos (min 5, max 15) to proceed to publication.');
+          return;
+        }
+      }
+      if (this.currentStep < 3) {
+        this.currentStep++;
+        this.showWizardStep(this.currentStep);
+      } else {
+        this.submitHostApplication();
+      }
+    });
+
+    document.getElementById('wizard-prev-btn')?.addEventListener('click', () => {
+      if (this.currentStep > 1) {
+        this.currentStep--;
+        this.showWizardStep(this.currentStep);
+      }
+    });
+
+    // Simulated photo uploader
+    const photoInput = document.getElementById('host-photos-input');
+    photoInput?.addEventListener('change', (e) => {
+      const count = e.target.files.length;
+      this.uploadedPhotosCount = count;
+      const status = document.getElementById('photos-count-indicator');
+      if (status) {
+        status.textContent = `${count} photos uploaded (Min 5, Max 15)`;
+        status.style.color = count >= 5 && count <= 15 ? '#10b981' : '#ef4444';
+      }
+    });
+
+    // Demo button to quick-load 5 photos for testing
+    document.getElementById('quick-add-5-photos')?.addEventListener('click', () => {
+      this.uploadedPhotosCount = 6;
+      const status = document.getElementById('photos-count-indicator');
+      if (status) {
+        status.textContent = '6 photos verified (Meets 5-15 rule) ✅';
+        status.style.color = '#10b981';
+      }
+      window.app.showToast('✅ 6 photos uploaded. Photo requirement fulfilled!');
+    });
+  }
+
+  showWizardStep(step) {
+    document.querySelectorAll('.wizard-step-pane').forEach((pane, idx) => {
+      pane.style.display = (idx + 1 === step) ? 'block' : 'none';
+    });
+
+    const nextBtn = document.getElementById('wizard-next-btn');
+    const prevBtn = document.getElementById('wizard-prev-btn');
+    if (prevBtn) prevBtn.style.display = step === 1 ? 'none' : 'inline-flex';
+    if (nextBtn) {
+      nextBtn.textContent = step === 3 ? 'Submit Host Application' : 'Next Step →';
+    }
+  }
+
+  submitHostApplication() {
+    const name = document.getElementById('host-input-title')?.value || 'New Addis Boutique Stay';
+    const city = document.getElementById('host-input-city')?.value || 'Addis Ababa';
+    const txId = document.getElementById('host-deposit-txid')?.value || 'TBL-9921038102';
+
+    // 1-listing limit rule (Version 1 platform rule)
+    if (this.hasActiveListing) {
+      alert('⚠️ 1-Listing Limit Per Host: Each host can only have ONE active listing in Version 1. You already have an active listing in your host dashboard.');
+    }
+
+    // Submit to Admin applications queue with phone match test
+    window.adminEngine.addHostApplication({
+      hostName: 'Kalkidan Alemayehu',
+      accountPhone: '+251 91 199 8877',
+      telebirrPhone: '+251 91 199 8877', // Matched demo
+      listingTitle: name,
+      city: city,
+      depositTxId: txId,
+      photosCount: this.uploadedPhotosCount,
+      timestamp: new Date().toLocaleTimeString()
+    });
+
+    document.getElementById('host-wizard-modal').classList.remove('open');
+    window.app.showToast('🎉 Host application submitted! Admin will verify phone match & deposit within 24-48h.');
+    window.adminEngine.addAuditEntry(`New Host application submitted by Kalkidan Alemayehu with 10k ETB deposit TxID: ${txId}`);
+  }
+
+  // --- Host Dashboard (Wallet, 10% Commission, 3-Status Toggle) ---
+  setupDashboardListeners() {
+    const dashModal = document.getElementById('host-dashboard-modal');
+    document.getElementById('open-host-dashboard-btn')?.addEventListener('click', () => {
+      this.updateWalletUI();
+      dashModal.classList.add('open');
+    });
+
+    document.getElementById('close-host-dashboard')?.addEventListener('click', () => {
+      dashModal.classList.remove('open');
+    });
+
+    // 3-Status listing toggle (Available, Booked, On Maintenance)
+    document.getElementById('listing-status-select')?.addEventListener('change', (e) => {
+      this.listingStatus = e.target.value;
+      if (this.listingStatus === 'On Maintenance') {
+        window.app.showToast('🔧 Listing set to "On Maintenance". Instantly hidden from all traveler feeds!');
+      } else {
+        window.app.showToast(`Listing status updated to: ${this.listingStatus}`);
+      }
+      window.searchEngine.applyFilters();
+      window.adminEngine.addAuditEntry(`Host updated listing status to: ${this.listingStatus}`);
+    });
+
+    // Top up wallet
+    document.getElementById('btn-topup-wallet')?.addEventListener('click', () => {
+      const amount = parseInt(prompt('Enter ETB amount to top up via Telebirr:', '5000'), 10);
+      if (amount && amount > 0) {
+        this.walletBalance += amount;
+        this.updateWalletUI();
+        window.app.showToast(`✅ Topped up ${amount.toLocaleString()} ETB via Telebirr!`);
+        window.adminEngine.addAuditEntry(`Host topped up Telebirr wallet with ${amount} ETB. New Balance: ${this.walletBalance} ETB`);
+      }
+    });
+
+    // Simulate booking button for demonstration
+    document.getElementById('btn-demo-host-confirm')?.addEventListener('click', () => {
+      window.bookingEngine.simulateHostConfirmation();
+    });
+  }
+
+  // Automatically called on confirmed booking: 10% commission deduction
+  deductCommission(amount, bookingId) {
+    this.walletBalance -= amount;
+    this.commissionHistory.unshift({
+      bookingId: bookingId,
+      amount: amount,
+      time: new Date().toLocaleTimeString()
+    });
+    this.updateWalletUI();
+  }
+
+  updateWalletUI() {
+    const balEl = document.getElementById('host-wallet-balance-num');
+    const statusBox = document.getElementById('host-wallet-status-box');
+    const cardEl = document.getElementById('host-wallet-card-container');
+    if (!balEl) return;
+
+    balEl.textContent = `ETB ${this.walletBalance.toLocaleString()}`;
+
+    // Wallet rules:
+    // At 5,000 ETB — low balance warning
+    // At 3,000 ETB — account frozen, all listings deactivated
+    if (this.walletBalance <= 3000) {
+      cardEl.className = 'wallet-card frozen-state';
+      statusBox.innerHTML = `
+        <span class="wallet-status-tag" style="background:#fee2e2;color:#b91c1c">🚨 ACCOUNT FROZEN (≤ 3,000 ETB)</span>
+        <p style="font-size:0.78rem;color:#b91c1c;margin-top:4px">All listings automatically deactivated and hidden! Top up via Telebirr to reactivate.</p>
+      `;
+    } else if (this.walletBalance <= 5000) {
+      cardEl.className = 'wallet-card warning-state';
+      statusBox.innerHTML = `
+        <span class="wallet-status-tag" style="background:#fef3c7;color:#b45309">⚠️ LOW BALANCE WARNING (≤ 5,000 ETB)</span>
+        <p style="font-size:0.78rem;color:#b45309;margin-top:4px">Warning notification sent. Please top up to prevent automatic freeze.</p>
+      `;
+    } else {
+      cardEl.className = 'wallet-card';
+      statusBox.innerHTML = `
+        <span class="wallet-status-tag" style="background:#dcfce7;color:#15803d">✅ ACTIVE & HEALTHY</span>
+        <p style="font-size:0.78rem;color:#15803d;margin-top:4px">Listing is live and discoverable in traveler search.</p>
+      `;
+    }
+  }
+}
+
+window.hostEngine = new HostEngine();
+
+
+/* === INLINED js/admin.js === */
+// TripTap — Admin Headquarters, Phone Match Indicator, Walk-in Reg & Tamper-Proof Audit
+
+class AdminEngine {
+  constructor() {
+    this.currentRole = 'superAdmin'; // superAdmin, admin, supportAgent, financeManager, listingsModerator
+    this.auditLogs = [
+      { id: 'LOG-001', role: 'System', action: 'TripTap Core Platform initialized. Database tables mounted.', time: '09:00:00' },
+      { id: 'LOG-002', role: 'Super Admin', action: 'Approved initial business ads carousel tiers (3s, 5s, 10s).', time: '09:15:30' },
+      { id: 'LOG-003', role: 'Finance Manager', action: 'Audited Telebirr 10% commission deductions across Addis stays.', time: '10:20:15' }
+    ];
+    this.hostApplications = [
+      {
+        id: 'APP-101',
+        hostName: 'Abebe Kebede',
+        accountPhone: '+251 91 144 5566',
+        telebirrPhone: '+251 91 144 5566', // Matched
+        listingTitle: 'Luxury Bole Condo near Friendship Mall',
+        city: 'Addis Ababa',
+        depositTxId: 'TBL-8820194820',
+        photosCount: 8,
+        status: 'Pending Review'
+      },
+      {
+        id: 'APP-102',
+        hostName: 'Tewodros Kassaye',
+        accountPhone: '+251 92 888 9900',
+        telebirrPhone: '+251 93 777 1122', // Mismatch warning!
+        listingTitle: 'Gondar Fasilides Royal Guest House',
+        city: 'Gondar',
+        depositTxId: 'TBL-7719284019',
+        photosCount: 6,
+        status: 'Pending Review'
+      }
+    ];
+    this.init();
+  }
+
+  init() {
+    this.setupListeners();
+    this.renderApplications();
+    this.renderAuditLogs();
+  }
+
+  setupListeners() {
+    const adminModal = document.getElementById('admin-portal-modal');
+    document.getElementById('open-admin-portal-btn')?.addEventListener('click', () => {
+      adminModal.classList.add('open');
+      this.renderApplications();
+      this.renderAuditLogs();
+    });
+
+    document.getElementById('close-admin-portal')?.addEventListener('click', () => {
+      adminModal.classList.remove('open');
+    });
+
+    // Admin role switcher
+    document.getElementById('admin-role-select')?.addEventListener('change', (e) => {
+      this.currentRole = e.target.value;
+      const roleBadge = document.getElementById('current-role-badge-text');
+      if (roleBadge) roleBadge.textContent = e.target.options[e.target.selectedIndex].text;
+      this.addAuditEntry(`Admin switched active role to: ${e.target.value}`);
+      window.app.showToast(`Switched role to: ${e.target.value}`);
+    });
+
+    // Admin sub-tabs
+    document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const tab = btn.dataset.tab;
+        document.querySelectorAll('.admin-tab-pane').forEach(p => p.style.display = 'none');
+        const activePane = document.getElementById(`tab-pane-${tab}`);
+        if (activePane) activePane.style.display = 'block';
+      });
+    });
+
+    // Walk-in Host Form
+    document.getElementById('walkin-submit-btn')?.addEventListener('click', () => {
+      this.submitWalkInHost();
+    });
+  }
+
+  // --- Phone Match Indicator & Applications ---
+  renderApplications() {
+    const container = document.getElementById('host-applications-list');
+    if (!container) return;
+
+    if (this.hostApplications.length === 0) {
+      container.innerHTML = '<p style="color:var(--text-muted);padding:20px;text-align:center">No pending host applications</p>';
+      return;
+    }
+
+    container.innerHTML = this.hostApplications.map(app => {
+      const isMatch = app.accountPhone.replace(/\s+/g, '') === app.telebirrPhone.replace(/\s+/g, '');
+      return `
+        <div class="host-app-card" id="app-card-${app.id}">
+          <div class="host-app-header">
+            <div>
+              <h4 style="font-weight:700;font-size:1.05rem;color:var(--text-main)">${app.hostName} — ${app.listingTitle}</h4>
+              <span style="font-size:0.78rem;color:var(--text-subtle)">📍 ${app.city} · 📷 ${app.photosCount} photos uploaded · Deposit Tx: ${app.depositTxId}</span>
+            </div>
+            <span class="badge-telebirr">10,000 ETB Deposit</span>
+          </div>
+
+          <div class="phone-match-box">
+            <div class="phone-comparison">
+              <span class="phone-label">Applicant Account Phone:</span>
+              <span class="phone-num">${app.accountPhone}</span>
+            </div>
+            <div class="phone-comparison">
+              <span class="phone-label">Telebirr Payer Phone:</span>
+              <span class="phone-num">${app.telebirrPhone}</span>
+            </div>
+            <div style="margin-left:auto">
+              ${isMatch ? 
+                `<span class="badge-phone-match match-success">✅ PHONE MATCHED</span>` : 
+                `<span class="badge-phone-match match-mismatch">⚠️ MISMATCH WARNING</span>`
+              }
+            </div>
+          </div>
+
+          <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:8px">
+            <button class="btn-secondary-pill" style="color:var(--danger);border-color:#fca5a5" onclick="window.adminEngine.rejectApplication('${app.id}')">Reject Application</button>
+            <button class="btn-primary-pill" onclick="window.adminEngine.approveApplication('${app.id}')">Approve & Activate Listing</button>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  approveApplication(appId) {
+    const app = this.hostApplications.find(a => a.id === appId);
+    if (!app) return;
+    this.hostApplications = this.hostApplications.filter(a => a.id !== appId);
+    this.renderApplications();
+    this.addAuditEntry(`Approved Host Application ${appId} for ${app.hostName} (${app.listingTitle}). Listing activated live.`);
+    window.app.showToast(`🎉 Host ${app.hostName} approved and verified!`);
+  }
+
+  rejectApplication(appId) {
+    const app = this.hostApplications.find(a => a.id === appId);
+    if (!app) return;
+    this.hostApplications = this.hostApplications.filter(a => a.id !== appId);
+    this.renderApplications();
+    this.addAuditEntry(`REJECTED Host Application ${appId} for ${app.hostName} due to verification check.`);
+    window.app.showToast(`Application ${appId} rejected.`);
+  }
+
+  // --- Walk-in Host Registration (Office in Addis Ababa) ---
+  submitWalkInHost() {
+    const name = document.getElementById('walkin-name')?.value;
+    const phone = document.getElementById('walkin-phone')?.value;
+    const idType = document.getElementById('walkin-id-type')?.value;
+    const listing = document.getElementById('walkin-listing-title')?.value;
+    const city = document.getElementById('walkin-city')?.value;
+
+    if (!name || !phone || !listing) {
+      window.app.showToast('⚠️ Please fill all walk-in host registration fields');
+      return;
+    }
+
+    this.addAuditEntry(`Walk-in Host registered at TripTap Office: ${name} (${phone}), ID: ${idType}, Listing: ${listing} in ${city}. Bypassed online queue.`);
+    window.app.showToast(`✅ Walk-in Host ${name} registered & verified simultaneously!`);
+
+    // Reset inputs
+    document.getElementById('walkin-name').value = '';
+    document.getElementById('walkin-phone').value = '';
+    document.getElementById('walkin-listing-title').value = '';
+  }
+
+  // --- Tamper-Proof Audit Log (Write-Only, Append-Only) ---
+  addAuditEntry(action) {
+    const entry = {
+      id: 'LOG-' + Math.floor(100 + Math.random() * 900),
+      role: this.currentRole,
+      action: action,
+      time: new Date().toLocaleTimeString()
+    };
+    this.auditLogs.unshift(entry);
+    this.renderAuditLogs();
+  }
+
+  renderAuditLogs() {
+    const tbody = document.getElementById('audit-table-body');
+    if (!tbody) return;
+
+    tbody.innerHTML = this.auditLogs.map(log => `
+      <tr>
+        <td style="font-family:monospace;font-weight:700">${log.id}</td>
+        <td><span class="audit-badge-readonly">${log.role}</span></td>
+        <td>${log.action}</td>
+        <td style="color:var(--text-subtle)">${log.time}</td>
+        <td><span style="font-size:0.7rem;color:#059669;font-weight:700">🔒 Verified</span></td>
+      </tr>
+    `).join('');
+  }
+
+  addHostApplication(app) {
+    this.hostApplications.unshift(app);
+    this.renderApplications();
+  }
+}
+
+window.adminEngine = new AdminEngine();
+
+
+/* === INLINED js/chat.js === */
+// TripTap — Permanent In-App Chat Engine
+
+class ChatEngine {
+  constructor() {
+    this.messages = [];
+    this.activeHost = null;
+    this.init();
+  }
+
+  init() {
+    document.getElementById('close-chat-drawer')?.addEventListener('click', () => {
+      document.getElementById('chat-drawer').classList.remove('open');
+    });
+
+    document.getElementById('nav-chat-btn')?.addEventListener('click', () => {
+      document.getElementById('chat-drawer').classList.toggle('open');
+    });
+
+    document.getElementById('chat-send-btn')?.addEventListener('click', () => {
+      this.sendMessage();
+    });
+
+    document.getElementById('chat-input-field')?.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') this.sendMessage();
+    });
+  }
+
+  openChatWithHost(listing, txId) {
+    this.activeHost = listing.hostName;
+    const drawer = document.getElementById('chat-drawer');
+    document.getElementById('chat-partner-name').textContent = listing.hostName;
+    document.getElementById('chat-partner-sub').textContent = `Verified Host · ${listing.titleEn}`;
+
+    // Add initial system message and traveler payment message
+    this.messages = [
+      {
+        sender: 'system',
+        text: '🔒 End-to-End Permanent Log: All messages, timestamps & Telebirr receipts are immutable and audited by TripTap compliance.',
+        time: new Date().toLocaleTimeString()
+      },
+      {
+        sender: 'traveler',
+        text: `Hello ${listing.hostName}! I have just transferred the booking deposit via Telebirr. Unique Transaction ID: ${txId}`,
+        receipt: true,
+        time: new Date().toLocaleTimeString()
+      }
+    ];
+
+    this.renderMessages();
+    drawer.classList.add('open');
+
+    // Simulate host acknowledging in chat after 6 seconds
+    setTimeout(() => {
+      this.messages.push({
+        sender: 'host',
+        text: `Salute! Thank you for the payment. Checking my Telebirr account now to confirm your booking...`,
+        time: new Date().toLocaleTimeString()
+      });
+      this.renderMessages();
+    }, 6000);
+  }
+
+  sendMessage() {
+    const input = document.getElementById('chat-input-field');
+    const text = input?.value.trim();
+    if (!text) return;
+
+    this.messages.push({
+      sender: 'traveler',
+      text: text,
+      time: new Date().toLocaleTimeString()
+    });
+
+    input.value = '';
+    this.renderMessages();
+  }
+
+  renderMessages() {
+    const container = document.getElementById('chat-messages-container');
+    if (!container) return;
+
+    container.innerHTML = this.messages.map(m => {
+      if (m.sender === 'system') {
+        return `<div class="chat-bubble system">${m.text}</div>`;
+      }
+      return `
+        <div class="chat-bubble ${m.sender}">
+          <div>${m.text}</div>
+          ${m.receipt ? `
+            <div class="chat-receipt-preview">
+              <div style="background:rgba(2,132,199,0.2);padding:6px 10px;border-radius:4px;font-size:0.75rem;font-weight:700">
+                📲 Telebirr Receipt Screenshot Verified
+              </div>
+            </div>
+          ` : ''}
+          <span class="chat-time">${m.time}</span>
+        </div>
+      `;
+    }).join('');
+
+    container.scrollTop = container.scrollHeight;
+  }
+}
+
+window.chatEngine = new ChatEngine();
+
+
+</script>
 </body>
 </html>
